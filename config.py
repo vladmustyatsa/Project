@@ -22,3 +22,5 @@ class Configuration:
 	MAIL_USE_TLS = False
 	#DEFAULT_MAIL_SENDER='Danny from DPC'
 	SECURITY_EMAIL_SENDER = 'vladislavmustyatsa@gmail.com'
+
+	#Comment
