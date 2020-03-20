@@ -18,3 +18,7 @@ migrate = Migrate(app, db)
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
+from models import User
+# Security
+user_datastore = SQLAlchemyUserDatastore(db, User, None)
+security = Security(app, user_datastore)
