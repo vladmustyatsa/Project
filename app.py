@@ -8,13 +8,14 @@ from flask_admin import Admin
 from admin import HomeAdminView, UserAdminView
 from flask_mail import Mail
 
+
 # App
 app = Flask(__name__)
 app.config.from_object(Configuration)
 
 # DateBase
 db = SQLAlchemy(app)
-
+from forms import ExtendedRegisterForm
 # Migration
 migrate = Migrate(app, db)
 manager = Manager(app)
@@ -23,7 +24,7 @@ manager.add_command('db', MigrateCommand)
 from models import User
 # Security
 user_datastore = SQLAlchemyUserDatastore(db, User, None)
-security = Security(app, user_datastore)
+security = Security(app, user_datastore,register_form=ExtendedRegisterForm)
 
 # Admin
 admin = Admin(app, 'MyApp', url='/', index_view=HomeAdminView(name='Home'))

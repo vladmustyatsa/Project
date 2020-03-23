@@ -5,3 +5,5 @@ flask-script
 flask-security
 flask-admin
 mysql-connector
+flask-mail
+wtforms

@@ -1,4 +1,4 @@
-from flask import redirect, url_for, request
+from flask import redirect, url_for, request, render_template
 from flask_security import current_user, logout_user
 from app import app
 
@@ -9,7 +9,7 @@ def index():
 	except:
 		return 'logout'
 
-@app.route('/change-account')
+@app.route('/change-user')
 def change_account():
 	logout_user()
 	return redirect(url_for('security.login'))
