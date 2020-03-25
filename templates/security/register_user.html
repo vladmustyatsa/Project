@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <title></title>
 </head>
 <body>
-  {% from "security/_macros.html" import render_field_with_errors, render_field %}
-{% include "security/_messages.html" %}
-<h1>{{ _('Register') }}</h1>
-<form action="{{ url_for_security('register') }}" method="POST" name="register_user_form" enctype="multipart/form-data">
-  {{ register_user_form.hidden_tag() }}
-  {{ render_field_with_errors(register_user_form.nickname) }}
-  {{ render_field_with_errors(register_user_form.email) }}
-  {{ render_field_with_errors(register_user_form.password) }}
-  {% if register_user_form.password_confirm %}
-    {{ render_field_with_errors(register_user_form.password_confirm) }}
-  {% endif %}
-  {{ render_field_with_errors(register_user_form.about_me) }}
-  {{ render_field_with_errors(register_user_form.avatar, name_='avatar') }}
-  {{ render_field(register_user_form.submit) }}
-</form>
-{% include "security/_menu.html" %}
-</body>
-</html>
+  <div class="container">
+    <div class="row">
+      <div class='col'>
+        {% from "security/_macros.html" import render_field_with_errors, render_field %}
+        {% include "security/_messages.html" %}
+        <h1>{{ _('Register') }}</h1>
+        <form action="{{ url_for_security('register') }}" method="POST" name="register_user_form" enctype="multipart/form-data">
+          {{ register_user_form.hidden_tag() }}
+          {{ render_field_with_errors(register_user_form.nickname) }}
+          {{ render_field_with_errors(register_user_form.email) }}
+          {{ render_field_with_errors(register_user_form.password) }}
+          {% if register_user_form.password_confirm %}
+          {{ render_field_with_errors(register_user_form.password_confirm) }}
+          {% endif %}
+          {{ render_field_with_errors(register_user_form.about_me) }}
+          {{ render_field_with_errors(register_user_form.avatar, name_='avatar') }}
+          {{ render_field(register_user_form.submit) }}
+        </form>
+        {% include "security/_menu.html" %}
+        <div>
+          <div>
+          </div>
+        </body>
+        </html>
 
