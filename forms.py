@@ -1,45 +1,30 @@
+import re
+import os
+from flask import request, url_for
 from flask_wtf import Form
+from flask_wtf.file import FileAllowed
 from flask_security.forms import RegisterForm, Required
 from wtforms import StringField, TextAreaField, FileField, validators
 from wtforms_alchemy import Unique, ModelForm
+from app import app
 from models import User
 
 class ExtendedRegisterForm(RegisterForm):
-    email =  StringField('Email',[Required()])
+    email =  StringField('Email',[Required(),validators.email('Invalid email')])
     nickname = StringField('Nickname', [Required()])
     about_me = TextAreaField('About')
     avatar = FileField('Avatar')
     def validate(self):
-        """ Add nicknae validation
-        
-            :return: True is the form is valid
-        """
-        # Use standart validator
 
         validation = Form.validate(self)
         is_valid = True
         if not validation:
-           return is_valid
-        print(self.email.errors)
-        if 'Invalid email address' not in self.email.errors:
-
-	        if '@' not in self.email.data:
-	        	self.email.errors.append('Invalid email')
-	        	is_valid = False
-	        	#return False
-	        
-	        else:
-	        	smtp_server = self.email.data[self.email.data.index('@'):]
-	        	print(smtp_server)
-	        	if '.' not in smtp_server or len(smtp_server) == 2 or smtp_server[:smtp_server.index('.')]:
-	        		print('asdasd')
-	        		self.email.errors.append('Invalid email')
-	        		is_valid = False
-	        		#return False
+           is_valid = False
         	
-        if len(self.nickname.data) > 16:
-        	self.nickname.errors.append('Nickname is too long')
-        	is_valid = False
+        is_valid_nickname = re.search(r'^[a-zA-Z][a-zA-Z0-9-_\.]{1,15}$',self.nickname.data)
+        if not is_valid_nickname:
+            self.nickname.errors.append('Invalid nickname')
+            is_valid = False
         	#return False
         # Check if nickname already exists       
         user = User.query.filter_by(
@@ -50,13 +35,21 @@ class ExtendedRegisterForm(RegisterForm):
             is_valid = False
             #return False
 
-        filename = self.avatar.data
-        if filename:
-        	end = filename[::-1][:filename[::-1].index('.')]
-        	end = end[::-1]
-        	if end not in ['png','jpg','jpeg','gif']:
-        		self.avatar.errors.append('Inappropriate format')
-        		is_valid = False
-        		#return False
+        avatar_file = request.files.get('avatar')
+
+        if avatar_file:
+            is_valid_fileformat = re.search(r'([^\s]+(\.(?i)(jpg|png|gif|bmp|jpeg))$)',avatar_file.filename)
+            if not is_valid_fileformat:
+                self.avatar.errors.append('Inapropriate format')
+                is_valid = False
+            elif is_valid:
+                filename = avatar_file.filename
+                filename = filename[::-1]
+                ending = filename[:filename.index('.')+1]
+                ending = ending[::-1]
+                filename = self.nickname.data + ending
+                avatar_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                self.avatar.data = url_for('static', filename=filename)
+
 
         return is_valid

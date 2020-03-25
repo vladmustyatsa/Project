@@ -1,7 +1,10 @@
+import os
+
+
 class Configuration:
 	DEBUG = True
 	SECRET_KEY = '1'
-
+	UPLOAD_FOLDER = os.getcwd() + '/static'
 	# SQLAlchemy
 	SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://root:1@localhost/project"
 	SQLALCHEMY_TRACK_MODIFICATIONS = False

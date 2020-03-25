@@ -1,16 +1,25 @@
-{% from "security/_macros.html" import render_field_with_errors, render_field %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  {% from "security/_macros.html" import render_field_with_errors, render_field %}
 {% include "security/_messages.html" %}
 <h1>{{ _('Register') }}</h1>
-<form action="{{ url_for_security('register') }}" method="POST" name="register_user_form">
+<form action="{{ url_for_security('register') }}" method="POST" name="register_user_form" enctype="multipart/form-data">
   {{ register_user_form.hidden_tag() }}
-  {{ render_field_with_errors(register_user_form.nickname,id='lox') }}
+  {{ render_field_with_errors(register_user_form.nickname) }}
   {{ render_field_with_errors(register_user_form.email) }}
   {{ render_field_with_errors(register_user_form.password) }}
   {% if register_user_form.password_confirm %}
     {{ render_field_with_errors(register_user_form.password_confirm) }}
   {% endif %}
   {{ render_field_with_errors(register_user_form.about_me) }}
-  {{ render_field_with_errors(register_user_form.avatar) }}
+  {{ render_field_with_errors(register_user_form.avatar, name_='avatar') }}
   {{ render_field(register_user_form.submit) }}
 </form>
 {% include "security/_menu.html" %}
+</body>
+</html>
+
