@@ -24,6 +24,6 @@ class Configuration:
 	MAIL_PASSWORD = 'takestartpassword'
 	MAIL_USE_TLS = False
 	#DEFAULT_MAIL_SENDER='Danny from DPC'
-	SECURITY_EMAIL_SENDER = 'takestart.mail@gmail.com'
+	SECURITY_EMAIL_SENDER = 'vladislavmustyatsa@gmail.com'
 
 	#Comment
