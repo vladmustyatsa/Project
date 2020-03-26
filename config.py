@@ -20,8 +20,8 @@ class Configuration:
 	MAIL_SERVER = 'smtp.gmail.com'
 	MAIL_PORT = 465
 	MAIL_USE_SSL = True
-	MAIL_USERNAME = 'vladislavmustyatsa@gmail.com'
-	MAIL_PASSWORD = 'Riopara2005'
+	MAIL_USERNAME = 'takestart.mail@gmail.com'
+	MAIL_PASSWORD = 'takestartpassword'
 	MAIL_USE_TLS = False
 	#DEFAULT_MAIL_SENDER='Danny from DPC'
 	SECURITY_EMAIL_SENDER = 'vladislavmustyatsa@gmail.com'
