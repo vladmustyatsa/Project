@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <link rel="shortcut icon" href="{{url_for('static',filename='site-images/icon.png')}}" type="image/x-icon">
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="{{url_for('static',filename='css/base.css')}}">
+	<title>TakeStart|{% block title %}
+
+		{% endblock%}
+	</title>
+	
+<style type="text/css">
+
+</style>
+
+</head>
+<body>
+	
+	<nav class="navbar fixed-top navbar-light bg-faded">
+		<div class="navbar-brand">
+
+			<a href="#" class="main-title navbar-brand" >Take<span class="main-title-orange">Start</span></a>
+		</div>
+		<div class="dropdown">
+			<a class="btn btn dropdown-toggle shadow-lg bg-faded rounded profile-dropdown-link"  href="#" role="button" 
+			id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="">
+			<img src="{{url_for('static',filename='site-images/index.jpeg')}}" width="30" height="30" class="d-inline-block align-top" alt="">
+			<span class="profile-dropdown-text" style="">
+				vladmustyatsa
+			</span>
+		</a>
+
+		<div class="dropdown-menu shadow-lg bg-faded profile-dropdown" style="" aria-labelledby="dropdownMenuLink">
+			<a class="dropdown-item link" href="#">Profile</a>
+			<div class="dropdown-divider"></div>
+			<a class="dropdown-item link" href="#">Change account</a>
+			<div class="dropdown-divider"></div>
+			<a class="dropdown-item link" href="#">Exit</a>
+		</div>
+	</div>
+</nav>
+<main>
+	{% block main %}
+
+	{% endblock %}
+
+</main>	
+</body>
+</html>

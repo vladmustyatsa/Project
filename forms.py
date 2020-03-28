@@ -5,7 +5,7 @@ from flask_wtf import Form
 from flask_wtf.file import FileAllowed
 from flask_security.forms import RegisterForm, Required
 from wtforms import StringField, TextAreaField, FileField, validators
-from wtforms_alchemy import Unique, ModelForm
+from wtforms_alchemy import Unique, ModelForm # for checking wheather in appenv
 from app import app
 from models import User
 
@@ -13,7 +13,7 @@ class ExtendedRegisterForm(RegisterForm):
     email =  StringField('Email',[Required(),validators.email('Invalid email')])
     nickname = StringField('Nickname', [Required()])
     about_me = TextAreaField('About')
-    avatar = FileField('Avatar')
+    #avatar = FileField('Avatar')
     def validate(self):
 
         validation = Form.validate(self)
@@ -35,7 +35,7 @@ class ExtendedRegisterForm(RegisterForm):
             is_valid = False
             #return False
 
-        avatar_file = request.files.get('avatar')
+        '''avatar_file = request.files.get('avatar')
 
         if avatar_file:
             is_valid_fileformat = re.search(r'([^\s]+(\.(?i)(jpg|png|gif|bmp|jpeg))$)',avatar_file.filename)
@@ -49,7 +49,7 @@ class ExtendedRegisterForm(RegisterForm):
                 ending = ending[::-1]
                 filename = self.nickname.data + ending
                 avatar_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                self.avatar.data = url_for('static', filename=filename)
+                self.avatar.data = url_for('static', filename=filename)'''
 
 
         return is_valid

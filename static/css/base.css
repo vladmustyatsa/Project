@@ -1,0 +1,112 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap);
+
+.main-title{
+	font-weight: bold;
+}
+.main-title:focus{
+	outline: none;
+}
+
+.main-title-orange{
+	color:#fa6000;
+}
+
+.profile-dropdown-link{
+	width: 194px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.profile-dropdown-link:hover{
+	color:#fa6000;
+
+}
+.profile-dropdown-link:focus{
+	color:#fa6000;
+
+}
+.profile-dropdown-text{
+	font-weight: bold;
+}
+.profile-dropdown{
+	margin-top: 15px;
+	width: 194px;
+	border:none;
+}
+.link{
+	font-family: 'Noto Sans Regular',sans-serif;
+}
+
+.link:active{
+	color:#fa6000;
+	outline: none;
+	background-color: white; !important;
+}
+.link:focus{
+	color:#fa6000;
+	outline: none;
+	background-color: white; !important;
+}
+.link:hover{
+	color:#fa6000;
+	outline: none;
+}
+.my-button{
+	border: none;
+	outline: none !important;
+	background-color:#fa6000;
+}
+.my-button:hover{
+	border: none;
+	outline: none !important;
+	background-color:#fa4400;
+}
+.my-button:active{
+	border: none;
+	outline: none !important;
+	background-color:#fa4400 !important;
+}
+.my-button:focus{
+	outline: 0!important;
+	outline-color: transparent!important;
+	outline-width: 0!important;
+	outline-style: none!important;
+	box-shadow: 0 0 0 0 rgba(0,123,255,0)!important;
+	outline: none !important;
+	background-color:#fa4400;
+}
+
+.my-button::-moz-focus-inner {
+	border: 0 !important;
+	outline: none !important;
+
+}
+
+
+/*.my-button:hover, .my-button:focus, .my-button:active{
+	background-color:#fa6000;
+	border:10px black solid;
+	outline: : none;
+	}*/
+
+
+	label{
+		font-family: 'Source Sans Pro Regular',sans-serif;
+	}
+
+	button{
+		font-family: 'Source Sans Pro Regular',sans-serif;
+	}
+
+	main{
+		margin-top:7%
+	}
+	.signin-form{
+		margin-top:10%;
+		margin-bottom:10%;
+		margin-right: 5%;
+		margin-left: 5%
+	}
+
+	
+

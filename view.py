@@ -8,6 +8,9 @@ def index():
 		return str(current_user.nickname)
 	except:
 		return 'logout'
+@app.route('/base')
+def base():
+	return render_template('signin.html')
 
 @app.route('/change-user')
 def change_account():
