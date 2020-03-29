@@ -122,11 +122,25 @@ a svg:hover{
 	main{
 		margin-top:7%
 	}
-	.signin-form{
+	.sign-form{
 		margin-top:10%;
 		margin-bottom:10%;
 		margin-right: 5%;
 		margin-left: 5%
+	}
+
+	.signup-form{
+		margin-top:5%;
+		margin-bottom:5%;
+		margin-right:3%;
+		margin-left: 3%
+	}
+
+	textarea{
+		
+		resize: none;
+
+
 	}
 
 	

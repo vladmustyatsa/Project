@@ -12,8 +12,8 @@ from models import User
 class ExtendedRegisterForm(RegisterForm):
     email =  StringField('Email',[Required(),validators.email('Invalid email')])
     nickname = StringField('Nickname', [Required()])
-    about_me = TextAreaField('About')
-    #avatar = FileField('Avatar')
+    about_me = TextAreaField('About me')
+    avatar = FileField('Avatar')
     def validate(self):
 
         validation = Form.validate(self)
@@ -23,7 +23,7 @@ class ExtendedRegisterForm(RegisterForm):
         	
         is_valid_nickname = re.search(r'^[a-zA-Z][a-zA-Z0-9-_\.]{1,15}$',self.nickname.data)
         if not is_valid_nickname:
-            self.nickname.errors.append('Invalid nickname')
+            self.nickname.errors.append(r"Only letters,ciphers, '-', '_' and '.'<br>(no more than 16 characters)")
             is_valid = False
         	#return False
         # Check if nickname already exists       
@@ -34,6 +34,18 @@ class ExtendedRegisterForm(RegisterForm):
             self.nickname.errors.append('Nickname already exists')
             is_valid = False
             #return False
+        email = User.query.filter_by(
+            email=self.email.data).first()
+        if email is not None:
+            # Text displayed to the user
+            self.email.errors.append('Email already exists')
+            is_valid = False
+
+        filename = self.avatar.data
+        self.avatar.data = '/static/avatars/'+self.nickname.data+'.smth'
+        '''if self.password.data != self.password_confirm.data:
+            self.password_confirm.errors.append('Not equals')
+            is_valid = False'''
 
         '''avatar_file = request.files.get('avatar')
 

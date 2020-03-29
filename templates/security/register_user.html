@@ -1,32 +1,83 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <title></title>
-</head>
-<body>
-  <div class="container">
-    <div class="row">
-      <div class='col'>
-        {% from "security/_macros.html" import render_field_with_errors, render_field %}
-        {% include "security/_messages.html" %}
-        <h1>{{ _('Register') }}</h1>
-        <form action="{{ url_for_security('register') }}" method="POST" name="register_user_form">
-          {{ register_user_form.hidden_tag() }}
-          {{ render_field_with_errors(register_user_form.nickname) }}
-          {{ render_field_with_errors(register_user_form.email) }}
-          {{ render_field_with_errors(register_user_form.password) }}
-          {% if register_user_form.password_confirm %}
-          {{ render_field_with_errors(register_user_form.password_confirm) }}
-          {% endif %}
-          {{ render_field_with_errors(register_user_form.about_me) }}
+{% extends 'base.html' %}
+{% block title %}
+Sign in
+{% endblock %}
+{% block main %}
+{% from "security/_macros.html" import render_field_with_errors, render_field %}
+{% include "security/_messages.html" %}
+<div class="container">
+  <div class="row shadow-lg p-3 mb-5 bg-white rounded">
+    <div class="col-lg">
+
+      {% from "security/_macros.html" import render_field_with_errors, render_field %}
+      {% include "security/_messages.html" %}
+      
+      <form action="{{ url_for_security('register') }}" method="POST" name="register_user_form" class="signup-form">
+        <h1>Sign up</h1>
+        <div class="row">
+        <div class="col-lg-4">
           
-          {{ render_field(register_user_form.submit) }}
-        </form>
-        {% include "security/_menu.html" %}
-        <div>
-          <div>
+          {{ register_user_form.hidden_tag() }}
+          <div class="form-group">
+            <!--{{ render_field_with_errors(register_user_form.nickname) }}-->
+            {% if not register_user_form.nickname.errors %}
+            {{ render_field_with_errors(register_user_form.nickname,class="form-control",
+            id='nickname',placeholder="Your nickname") }}
+            <small id="emailHelp" class="form-text text-muted">Only letters,ciphers, '-', '_' and '.'<br>(no more than 16 characters)</small>
+            {% else %}
+            {{ render_field_with_errors(register_user_form.nickname,class="form-control is-invalid",
+            id='nickname',placeholder="Your nickname") }}
+            {% endif %}
           </div>
-        </body>
-        </html>
+          <div class="form-group">
+            <!--{{ render_field_with_errors(register_user_form.email) }}-->
+            {% if not register_user_form.email.errors %}
+            {{ render_field_with_errors(register_user_form.email,class="form-control",
+            id='email',placeholder="Your email") }}
+            {% else %}
+            {{ render_field_with_errors(register_user_form.email,class="form-control is-invalid",
+            id='email',placeholder="Your email") }}
+            {% endif %}
+          </div>
+          <div class="form-group">
+            <!--{{ render_field_with_errors(register_user_form.password) }}-->
+            {% if not register_user_form.password.errors %}
+            {{ render_field_with_errors(register_user_form.password,class="form-control",id="password",placeholder="Password") }}
+
+            <small id="emailHelp" class="form-text text-muted">Password must be at least 6 characters</small>
+            {% else %}
+            {{ render_field_with_errors(register_user_form.password,class="form-control is-invalid",id="password",placeholder="Password") }}
+            {% endif %}
+          </div>
+
+          {% if register_user_form.password_confirm %}
+          <div class="form-group">
+            <!--{{ render_field_with_errors(register_user_form.password_confirm) }}-->
+            {% if not register_user_form.password_confirm.errors %}
+            {{ render_field_with_errors(register_user_form.password_confirm,class="form-control",id="password_confirm",placeholder="Retype Password") }}
+            {% else %}
+            {{ render_field_with_errors(register_user_form.password_confirm,class="form-control is-invalid",id="password_confirm",placeholder="Retype Password") }}
+            {% endif %}
+          </div>
+          {% endif %}
+          <!--{{ render_field_with_errors(register_user_form.about_me) }}-->
+          
+        </div>
+
+        <div class="col-lg-8">
+          <div class="form-group" style="height: 100%">
+            {{ render_field_with_errors(register_user_form.about_me, class="form-control",rows='14') }}
+          </div>
+        </div>
+        <div class="col">
+        <a href="{{url_for('security.login')}}" class="link">Sign in</a>
+          /
+          {{ render_field(register_user_form.submit,class="btn btn-secondary my-button",value='Sign up') }}
+        </div>
+      </div>
+      </form>
+      <div>
+        <div>
+        </div>
+        {% endblock %}
 
