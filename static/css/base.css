@@ -81,6 +81,27 @@
 	outline: none !important;
 
 }
+.casual-button:focus{
+	outline: 0!important;
+	outline-color: transparent!important;
+	outline-width: 0!important;
+	outline-style: none!important;
+	box-shadow: 0 0 0 0 rgba(0,123,255,0)!important;
+	outline: none !important;
+}
+
+.casual-button::-moz-focus-inner {
+	border: 0 !important;
+	outline: none !important;
+
+}
+
+.svg-link:focus{
+	outline: none;
+}
+a svg:hover{ 
+  color: #fa6000;
+}
 
 
 /*.my-button:hover, .my-button:focus, .my-button:active{

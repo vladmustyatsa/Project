@@ -4,15 +4,20 @@ from app import app
 
 @app.route('/')
 def index():
-	try:
-		return str(current_user.nickname)
-	except:
-		return 'logout'
+	return render_template('home.html')
 @app.route('/base')
 def base():
 	return render_template('signin.html')
 
 @app.route('/change-user')
-def change_account():
+def change_user():
 	logout_user()
 	return redirect(url_for('security.login'))
+
+@app.route('/p')
+def index1():
+	return render_template('base.html')
+
+@app.route('/test')
+def test():
+	return render_template('test.html')

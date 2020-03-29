@@ -12,6 +12,15 @@ from flask_mail import Mail
 # App
 app = Flask(__name__)
 app.config.from_object(Configuration)
+def is_login():
+	try:
+		return current_user.nickname
+	except:
+		return ''
+	
+		
+
+app.jinja_env.globals.update(is_login=is_login)
 
 # DateBase
 db = SQLAlchemy(app)
@@ -32,3 +41,4 @@ admin.add_view(UserAdminView(User, db.session))
 
 # Mail
 mail = Mail(app)
+

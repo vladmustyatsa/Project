@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}
+Sign in
+{% endblock %}
+{% block main %}
+{% from "security/_macros.html" import render_field_with_errors, render_field %}
+{% include "security/_messages.html" %}
+<div class="container" >
+	<div class="row">
+
+		<div class="col-lg-4 shadow-lg p-3 mb-5 bg-white rounded">
+			<form action="{{ url_for_security('login') }}" method="POST" class="signin-form"name="login_user_form">
+				<h1>Sign in</h1>
+				{{ login_user_form.hidden_tag() }}
+				<div class="form-group">
+					{% if not login_user_form.email.errors %}
+						{{ render_field_with_errors(login_user_form.email,class="form-control",
+						id='email',placeholder="Your email") }}
+					{% else %}
+					{{ render_field_with_errors(login_user_form.email,class="form-control is-invalid",
+						id='email',placeholder="Your email") }}
+					{% endif %}
+				</div>
+				<div class="form-group">
+					{% if not login_user_form.password.errors %}
+						{{ render_field_with_errors(login_user_form.password,class="form-control",id="password",placeholder="Password") }}
+					{% else %}
+						{{ render_field_with_errors(login_user_form.password,class="form-control is-invalid",id="password",placeholder="Password") }}
+					{% endif %}
+				</div>
+				<div class="form-group">
+					{% if not login_user_form.remember.errors %}
+						{{ render_field_with_errors(login_user_form.remember,class='my-button', id="remember") }}
+					{% else %}
+						{{ render_field_with_errors(login_user_form.remember,class='my-button is-invalid', id="remember") }}
+					{% endif %}
+				</div>
+				{{ render_field(login_user_form.next) }}
+				{{ render_field(login_user_form.submit,class="btn btn-secondary my-button",value='Sign in') }}
+				/
+				<a href="{{url_for('security.register')}}" clas="link">Sign up</a>
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

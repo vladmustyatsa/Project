@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	 <link rel="shortcut icon" href="{{url_for('static',filename='site-images/icon.png')}}" type="image/x-icon">
+	<link rel="shortcut icon" href="{{url_for('static',filename='site-images/icon.png')}}" type="image/x-icon">
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -13,40 +13,68 @@
 		{% endblock%}
 	</title>
 	
-<style type="text/css">
+	<style type="text/css">
 
-</style>
+	</style>
 
 </head>
 <body>
-	
+	<div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="close casual-button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        You wiil exit from account
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light casual-button" data-dismiss="modal">Exit</button>
+        <form action="{{url_for('change_user')}}">
+        	<button type="submit" class="btn btn-primary my-button">Exit and change account</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 	<nav class="navbar fixed-top navbar-light bg-faded">
 		<div class="navbar-brand">
 
-			<a href="#" class="main-title navbar-brand" >Take<span class="main-title-orange">Start</span></a>
+			<a href="{{url_for('index')}}" class="main-title navbar-brand" >Take<span class="main-title-orange">Start</span></a>
 		</div>
+		{% if is_login() != ''%}
 		<div class="dropdown">
 			<a class="btn btn dropdown-toggle shadow-lg bg-faded rounded profile-dropdown-link"  href="#" role="button" 
 			id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="">
 			<img src="{{url_for('static',filename='site-images/index.jpeg')}}" width="30" height="30" class="d-inline-block align-top" alt="">
 			<span class="profile-dropdown-text" style="">
-				vladmustyatsa
+				{{current_user.nickname}}
 			</span>
 		</a>
 
 		<div class="dropdown-menu shadow-lg bg-faded profile-dropdown" style="" aria-labelledby="dropdownMenuLink">
 			<a class="dropdown-item link" href="#">Profile</a>
 			<div class="dropdown-divider"></div>
-			<a class="dropdown-item link" href="#">Change account</a>
+			<a class="dropdown-item link" href="{{url_for('change_user')}}" data-toggle="modal" data-target="#staticBackdrop">Change account</a>
 			<div class="dropdown-divider"></div>
-			<a class="dropdown-item link" href="#">Exit</a>
+			<a class="dropdown-item link" href="{{url_for('security.logout')}}">Exit</a>
 		</div>
 	</div>
+	{% else %}
+	<a class="navbar-brand svg-link" href="{{url_for('security.login')}}">
+		<!--<img src="{{url_for('static',filename='/site-images/log-in.svg')}}" width="30" height="30" alt="">-->
+		<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-in"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+	</a>
+	{% endif %}
 </nav>
 <main>
-	{% block main %}
+{% block main %}
 
-	{% endblock %}
+
+{% endblock %}
 
 </main>	
 </body>
