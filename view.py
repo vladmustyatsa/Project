@@ -5,14 +5,19 @@ from app import app
 @app.route('/')
 def index():
 	return render_template('home.html')
-@app.route('/base')
-def base():
-	return render_template('signin.html')
 
 @app.route('/change-user')
 def change_user():
 	logout_user()
 	return redirect(url_for('security.login'))
+
+@app.route('/users/<user>')
+def get_profile(user):
+	return render_template('profile.html')
+#---------------------------------
+@app.route('/base')
+def base():
+	return render_template('signin.html')
 
 @app.route('/p')
 def index1():

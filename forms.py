@@ -41,8 +41,15 @@ class ExtendedRegisterForm(RegisterForm):
             self.email.errors.append('Email already exists')
             is_valid = False
 
-        filename = self.avatar.data
-        self.avatar.data = '/static/avatars/'+self.nickname.data+'.smth'
+        if is_valid:
+            filename = self.nickname.data+'.jpg'
+            avatar_file = open(os.getcwd()+'/static/avatars/'+filename,'wb')
+            default_avatar = open(os.getcwd()+'/static/site-images/'+'default-avatar.jpg','rb')
+            avatar_file.write(default_avatar.read())
+            avatar_file.close()
+            default_avatar.close()
+            self.avatar.data = '/static/avatars/'+filename
+
         '''if self.password.data != self.password_confirm.data:
             self.password_confirm.errors.append('Not equals')
             is_valid = False'''

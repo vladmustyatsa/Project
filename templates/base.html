@@ -20,26 +20,26 @@
 </head>
 <body>
 	<div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title main-title" id="staticBackdropLabel">Change account</h5>
-        <button type="button" class="close casual-button" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <label>You wanna exit from account, dont't you?</label>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-light casual-button" data-dismiss="modal">Exit</button>
-        <form action="{{url_for('change_user')}}">
-        	<button type="submit" class="btn btn-primary my-button">Exit and change account</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title main-title" id="staticBackdropLabel">Change account</h5>
+					<button type="button" class="close casual-button" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<label>You wanna exit from account, don't you?</label>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-light casual-button" data-dismiss="modal">Exit</button>
+					<form action="{{url_for('change_user')}}">
+						<button type="submit" class="btn btn-primary my-button">Exit and change account</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 	<nav class="navbar fixed-top navbar-light bg-light">
 		<div class="navbar-brand">
 
@@ -71,11 +71,46 @@
 	{% endif %}
 </nav>
 <main>
-{% block main %}
+	{% block main %}
 
 
-{% endblock %}
+	{% endblock %}
 
 </main>	
+<footer class="page-footer font-small bg-light pt-4">
+
+	<!-- Footer Links -->
+	<div class="container-fluid text-center text-md-center">
+
+		<!-- Grid row -->
+		<div class="row">
+
+			<!-- Grid column -->
+
+			<div class="col">
+				<span class="main-title">For startupers <span class="main-title-orange">By startupers</span></span>
+				<div class="footer-copyright text-center bg-light py-3" style="">Support:
+					<a href="https://takestart.app/" class="link"> takestart.mail@gmail.com</a>
+				</div>
+				<div class="dropdown-divider"></div>
+
+				<!-- Copyright -->
+				<div class="footer-copyright text-center bg-light py-3" style="">© 2020 Copyright:
+					<a href="https://takestart.app/" class="link"> TakeStart.app</a>
+				</div>
+			</div>
+
+		</div>
+		<!-- Grid column -->
+
+	</div>
+	<!-- Grid row -->
+
+</div>
+<!-- Footer Links -->
+
+<!-- Copyright -->
+
+</footer>
 </body>
 </html>

@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap);
 
+
 .main-title{
 	font-weight: bold;
 }
@@ -110,7 +111,19 @@ a svg:hover{
 	outline: : none;
 	}*/
 
-
+	html,body{
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+	}
+	main{
+		flex: 1 0 auto;
+		margin-top:7%
+	}
+	footer{
+		flex: 0 0 auto;
+	}
 	label{
 		font-family: 'Source Sans Pro Regular',sans-serif;
 	}
@@ -119,9 +132,7 @@ a svg:hover{
 		font-family: 'Source Sans Pro Regular',sans-serif;
 	}
 
-	main{
-		margin-top:7%
-	}
+
 	.sign-form{
 		margin-top:10%;
 		margin-bottom:10%;
@@ -137,11 +148,9 @@ a svg:hover{
 	}
 
 	textarea{
-		
 		resize: none;
-
-
 	}
+
 
 	
 

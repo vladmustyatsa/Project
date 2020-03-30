@@ -65,8 +65,8 @@ Sign in
         </div>
 
         <div class="col-lg-8">
-          <div class="form-group" style="height: 100%">
-            {{ render_field_with_errors(register_user_form.about_me, class="form-control",rows='14') }}
+          <div class="form-group">
+            {{ render_field_with_errors(register_user_form.about_me, class="form-control",rows='14',spellcheck="false") }}
           </div>
         </div>
         <div class="col">
