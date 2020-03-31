@@ -41,6 +41,10 @@ class ExtendedRegisterForm(RegisterForm):
             self.email.errors.append('Email already exists')
             is_valid = False
 
+        if len(self.about_me.data) > 1000:
+            self.about_me.errors.append('No more than 1000 characters')
+            is_valid = False
+
         if is_valid:
             filename = self.nickname.data+'.jpg'
             avatar_file = open(os.getcwd()+'/static/avatars/'+filename,'wb')

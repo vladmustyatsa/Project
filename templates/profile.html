@@ -6,10 +6,20 @@ Sign in
 	{% from "security/_macros.html" import render_field_with_errors, render_field %}
 	{% include "security/_messages.html" %}
 	<div class="container" >
-		<div class="row">
+		<div class="row shadow-lg p-3 mb-5 bg-white rounded">
 
-			<div class="col-lg-4 shadow-lg p-3 mb-5 bg-white rounded">
-				
+			<div class="col-lg">
+				<div class="row">
+					<div class="col-lg">
+						<img src="{{url_for('static',filename='/site-images/index.jpeg')}}" width="150" height="184">
+						
+					</div>
+					<div class="col-lg-10">
+						<span class="main-title">
+							Vasy
+						</span>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
