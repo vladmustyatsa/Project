@@ -7,7 +7,7 @@ Sign in
 {% include "security/_messages.html" %}
 <div class="container">
   <div class="row shadow-lg p-3 mb-5 bg-white rounded">
-    <div class="col-lg">
+    <div class="col-sm">
 
       {% from "security/_macros.html" import render_field_with_errors, render_field %}
       {% include "security/_messages.html" %}
@@ -15,7 +15,7 @@ Sign in
       <form action="{{ url_for_security('register') }}" method="POST" name="register_user_form" class="signup-form">
         <h1>Sign up</h1>
         <div class="row">
-        <div class="col-lg-4">
+        <div class="col-sm-4">
           
           {{ register_user_form.hidden_tag() }}
           <div class="form-group">
@@ -64,7 +64,7 @@ Sign in
           
         </div>
 
-        <div class="col-lg-8">
+        <div class="col-sm-8">
           <div class="form-group">
             {% if not register_user_form.about_me.errors %}
               {{ render_field_with_errors(register_user_form.about_me, class="form-control",rows='14',spellcheck="false",maxlength="1000") }}
@@ -79,7 +79,7 @@ Sign in
         <div class="col">
         <a href="{{url_for('security.login')}}" class="link">Sign in</a>
           /
-          {{ render_field(register_user_form.submit,class="btn btn-secondary my-button",value='Sign up') }}
+          {{ render_field(register_user_form.submit,class="btn my-button",value='Sign up') }}
         </div>
       </div>
       </form>

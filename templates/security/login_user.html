@@ -8,7 +8,7 @@ Sign in
 	<div class="container" >
 		<div class="row">
 
-			<div class="col-lg-4 shadow-lg p-3 mb-5 bg-white rounded">
+			<div class="col-sm-4 shadow-lg p-3 mb-5 bg-white rounded">
 				<form action="{{ url_for_security('login') }}" method="POST" class="sign-form"name="login_user_form">
 					<h1>Sign in</h1>
 					{{ login_user_form.hidden_tag() }}
@@ -36,7 +36,7 @@ Sign in
 						{% endif %}
 					</div>
 					{{ render_field(login_user_form.next) }}
-					{{ render_field(login_user_form.submit,class="btn btn-secondary my-button",value='Sign in') }}
+					{{ render_field(login_user_form.submit,class="btn my-button",value='Sign in') }}
 					/
 					<a href="{{url_for('security.register')}}" clas="link">Sign up</a>
 				</form>

@@ -36,6 +36,7 @@
 }
 .link{
 	font-family: 'Noto Sans Regular',sans-serif;
+	display:inline;
 }
 
 .link:active{
@@ -53,21 +54,25 @@
 	outline: none;
 }
 .my-button{
+	color: white;
 	border: none;
 	outline: none !important;
 	background-color:#fa6000;
 }
 .my-button:hover{
+	color: white;
 	border: none;
 	outline: none !important;
 	background-color:#fa4400;
 }
 .my-button:active{
+	color: white;
 	border: none;
 	outline: none !important;
 	background-color:#fa4400 !important;
 }
 .my-button:focus{
+	color: white;
 	outline: 0!important;
 	outline-color: transparent!important;
 	outline-width: 0!important;
@@ -97,9 +102,44 @@
 
 }
 
+.ts-image{
+	border:solid 4px white;
+	border-radius: 15px;
+	
+	
+}
+
 .svg-link:focus{
+	display: inline;
 	outline: none;
 }
+.subsribes-modal{
+	height:50%;	
+	margin-left: : auto;
+	overflow:auto;
+}
+}
+.ts-btn-danger:active{
+	border: none;
+	outline: none !important;
+	
+}
+.ts-btn-danger:focus{
+	outline: 0!important;
+	outline-color: transparent!important;
+	outline-width: 0!important;
+	outline-style: none!important;
+	box-shadow: 0 0 0 0 rgba(0,123,255,0)!important;
+	outline: none !important;
+
+}
+.user-and-project-title{
+	display: flex;
+}
+a svg{ 
+  color: black;
+}
+
 a svg:hover{ 
   color: #fa6000;
 }
@@ -116,6 +156,7 @@ a svg:hover{
 	display: flex;
 	flex-direction: column;
 	min-height: 100%;
+
 	}
 	main{
 		flex: 1 0 auto;

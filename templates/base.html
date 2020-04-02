@@ -9,7 +9,6 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="{{url_for('static',filename='css/base.css')}}">
 	<title>TakeStart|{% block title %}
-
 		{% endblock%}
 	</title>
 	
@@ -52,11 +51,12 @@
 			<img src="{{url_for('static',filename='site-images/index.jpeg')}}" width="30" height="30" class="d-inline-block align-top" alt="">
 			<span class="profile-dropdown-text" style="">
 				{{current_user.nickname}}
+				{% set nickname=current_user.nickname %}
 			</span>
 		</a>
 
 		<div class="dropdown-menu shadow-lg bg-faded profile-dropdown" style="" aria-labelledby="dropdownMenuLink">
-			<a class="dropdown-item link" href="#">Profile</a>
+			<a class="dropdown-item link" href="{{url_for('get_profile',username=nickname)}}">Profile</a>
 			<div class="dropdown-divider"></div>
 			<a class="dropdown-item link" href="{{url_for('change_user')}}" data-toggle="modal" data-target="#staticBackdrop">Change account</a>
 			<div class="dropdown-divider"></div>

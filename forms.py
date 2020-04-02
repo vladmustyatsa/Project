@@ -52,7 +52,8 @@ class ExtendedRegisterForm(RegisterForm):
             avatar_file.write(default_avatar.read())
             avatar_file.close()
             default_avatar.close()
-            self.avatar.data = '/static/avatars/'+filename
+            #self.avatar.data = '/static/avatars/'+filename
+            self.avatar.data = url_for('static',filename=f'/avatars/{filename}')
 
         '''if self.password.data != self.password_confirm.data:
             self.password_confirm.errors.append('Not equals')

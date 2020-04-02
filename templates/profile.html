@@ -1,27 +1,113 @@
 {% extends 'base.html' %}
 {% block title %}
-Sign in
+User
 {% endblock %}
 {% block main %}
-	{% from "security/_macros.html" import render_field_with_errors, render_field %}
-	{% include "security/_messages.html" %}
-	<div class="container" >
-		<div class="row shadow-lg p-3 mb-5 bg-white rounded">
-
-			<div class="col-lg">
-				<div class="row">
-					<div class="col-lg">
-						<img src="{{url_for('static',filename='/site-images/index.jpeg')}}" width="150" height="184">
-						
-					</div>
-					<div class="col-lg-10">
-						<span class="main-title">
-							Vasy
-						</span>
-					</div>
-				</div>
+<div class="subsribes-modal modal fade " style=""id="follow" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog"  role="document">
+		<div class="modal-content" >
+			<div class="modal-header">
+				<h5 class="modal-title main-title" id="followLabel">Subsriptions</h5>
+				<button type="button" class="close casual-button" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
+			<div class="modal-body">
+
+				<form action="#">
+					<img src="{{url_for('static',filename='/site-images/index.jpeg')}}" class="ts-image" width="50" height="60">
+					<a href="#">Loxteam1</a>
+					<button type="submit" class="btn btn-danger btn-sm ts-btn-danger">Unsubscribe</button>
+				</form>
+				<div class="dropdown-divider"></div>
+				<img src="{{url_for('static',filename='/site-images/index.jpeg')}}" class="ts-image" width="50" height="60">
+				<a href="#">Loxteam2</a>
+				<div class="dropdown-divider"></div>
+				<img src="{{url_for('static',filename='/site-images/index.jpeg')}}" class="ts-image" width="50" height="60">
+				<a href="#">Loxteam2</a>
+				<div class="dropdown-divider"></div>
+				<img src="{{url_for('static',filename='/site-images/index.jpeg')}}" class="ts-image" width="50" height="60">
+				<a href="#">Loxteam2</a>
+				<div class="dropdown-divider"></div>
+				<img src="{{url_for('static',filename='/site-images/index.jpeg')}}" class="ts-image" width="50" height="60">
+				<a href="#">Loxteam2</a>
+				<div class="dropdown-divider"></div>
+				<img src="{{url_for('static',filename='/site-images/index.jpeg')}}" class="ts-image" width="50" height="60">
+				<a href="#">Loxteam2</a>
+				<div class="dropdown-divider"></div>
+				<img src="{{url_for('static',filename='/site-images/index.jpeg')}}" class="ts-image" width="50" height="60">
+				<a href="#">Loxteam2</a>
+				<div class="dropdown-divider"></div>
+				<img src="{{url_for('static',filename='/site-images/index.jpeg')}}" class="ts-image" width="50" height="60">
+				<a href="#">Loxteam2</a>
+
+			</div>
+
 		</div>
 	</div>
+</div>
+<div class="container">
+	<div class="row" >
+
+		<div class="col-sm-5 shadow-lg p-3 mb-5 bg-white rounded">
+			<div class="row">
+				<div class="col-sm-4">
+					<img src="{{avatar_file}}" style="margin-top: 6%" class="ts-image" width="150" height="184">
+
+
+				</div>
+
+					<div class="col-sm-8"> 
+
+						<h2 class="main-title user-and-project-title" style="">
+							{{nickname}}
+
+						
+						{% if is_login() %}
+						{% if current_user.nickname==nickname %}
+						
+							<a class="navbar-brand svg-link"  href="{{url_for('security.login')}}">
+							<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></a>
+						
+						{%endif%}
+					{% endif %}
+					</h2>
+						<div style="margin-bottom: 1%;">
+							<a href="#" class="link">#asdteam</a>
+							<a href="#" class="link">#asdteam</a>
+							<a href="#" class="link">#asdteam</a>
+							<a href="#" class="link">#asdteam</a>
+							
+						</div>
+						<button type="button" class="btn  btn-block my-button" data-toggle="modal" data-target="#follow">Subscriptions</button>
+						{%if about%}
+						<div class="text-center">
+							<a class="link" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+								About {{nickname}}
+							</a>
+						</div>
+						{%endif%}
+					</div>
+
+					
+					</div>
+
+				</div>
+				{%if about%}
+				<div class="col-sm">
+					<div class="collapse" id="collapseExample" >
+						<div class="card card-body" style="height:225px;overflow: auto">
+							{{about}}
+
+						</div>
+					</div>
+				</div>
+				{%endif%}
+			</div>
+		</div>
+
+
+
+
 
 {% endblock %}
