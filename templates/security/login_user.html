@@ -4,13 +4,15 @@ Sign in
 {% endblock %}
 {% block main %}
 	{% from "security/_macros.html" import render_field_with_errors, render_field %}
-	{% include "security/_messages.html" %}
+	
 	<div class="container" >
 		<div class="row">
 
 			<div class="col-sm-4 shadow-lg p-3 mb-5 bg-white rounded">
-				<form action="{{ url_for_security('login') }}" method="POST" class="sign-form"name="login_user_form">
+				<form action="{{ url_for_security('login') }}" method="POST" class="signin-form" name="login_user_form">
+
 					<h1>Sign in</h1>
+					{% include "security/_messages.html" %}
 					{{ login_user_form.hidden_tag() }}
 					<div class="form-group">
 						{% if not login_user_form.email.errors %}

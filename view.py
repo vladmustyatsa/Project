@@ -30,9 +30,6 @@ def get_profile(username):
 
 
 #---------------------------------
-@app.route('/base')
-def base():
-	return render_template('signin.html')
 
 @app.route('/p')
 def index1():

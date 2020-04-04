@@ -15,6 +15,8 @@ class Configuration:
 	SECURITY_REGISTERABLE = True
 	SECURITY_REGISTER_URL = '/signup'
 	SECURITY_LOGIN_URL = '/signin'
+	SECURITY_CHANGEABLE = True
+	SECURITY_CHANGE_URL = '/change-password'
 
 	# Mail
 	MAIL_SERVER = 'smtp.gmail.com'

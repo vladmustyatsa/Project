@@ -1,0 +1,15 @@
+{%- with messages = get_flashed_messages(with_categories=true), errors = get_flashed_messages(category_filter=["error"]) -%}
+  {% if errors %}
+  	{% for category, error in errors %}
+      <li class="{{ category }} alert alert-danger">{{ error }}</li>
+
+    {% endfor %}
+  {% else %}
+    <div class="flashes" style="margin-top: 1%">
+    {% for category, message in messages %}
+      <div class="{{ category }} alert alert-success">{{ message }}</div>
+
+    {% endfor %}
+    </div>
+  {% endif %}
+{%- endwith %}
