@@ -1,6 +1,6 @@
 import re
 import os
-from flask import request, url_for
+from flask import request, url_for, request
 from flask_wtf import Form
 from flask_wtf.file import FileAllowed
 from flask_security.forms import RegisterForm, Required
@@ -15,11 +15,15 @@ class ExtendedRegisterForm(RegisterForm):
     about_me = TextAreaField('About me')
     avatar = FileField('Avatar')
     def validate(self):
-
-        validation = Form.validate(self)
+        url = request.url
+        url = url.replace(app.config['app_server_name'],'')
+        print(f'[INFO] URL: {url}')
         is_valid = True
-        if not validation:
-           is_valid = False
+        if url != '/edit-user':
+            validation = Form.validate(self)
+            
+            if not validation:
+               is_valid = False
         	
         is_valid_nickname = re.search(r'^[a-zA-Z][a-zA-Z0-9-_\.]{1,15}$',self.nickname.data)
         if not is_valid_nickname:
@@ -45,7 +49,7 @@ class ExtendedRegisterForm(RegisterForm):
             self.about_me.errors.append('No more than 1000 characters')
             is_valid = False
 
-        if is_valid:
+        if is_valid and url != '/edit-user':
             filename = self.nickname.data+'.jpg'
             avatar_file = open(os.getcwd()+'/static/avatars/'+filename,'wb')
             default_avatar = open(os.getcwd()+'/static/site-images/'+'default-avatar.jpg','rb')

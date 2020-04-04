@@ -55,7 +55,7 @@
 
 			
 
-			{% if is_login() != ''%}
+			{% if current_user.is_authenticated %}
 			<div class="dropdown" style="">
 				<a class="btn btn dropdown-toggle shadow-lg bg-faded rounded profile-dropdown-link"  href="#" role="button" 
 				id="dropdownMenuLink" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" style="">

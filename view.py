@@ -37,4 +37,4 @@ def index1():
 
 @app.route('/test')
 def test():
-	return render_template('test.html')
+	return render_template('test1.html')

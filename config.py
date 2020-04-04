@@ -3,6 +3,7 @@ import os
 
 class Configuration:
 	DEBUG = True
+	app_server_name = 'http://localhost:5000'
 	SECRET_KEY = '1'
 	UPLOAD_FOLDER = os.getcwd() + '/static'
 	# SQLAlchemy

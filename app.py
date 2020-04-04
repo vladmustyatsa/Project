@@ -12,6 +12,7 @@ from flask_mail import Mail
 # App
 app = Flask(__name__)
 app.config.from_object(Configuration)
+app.config['app_server_name'] = 'http://localhost:5000'
 def is_login():
 	try:
 		return current_user.nickname
