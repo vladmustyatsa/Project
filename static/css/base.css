@@ -13,7 +13,7 @@
 }
 
 .profile-dropdown-link{
-	width: 194px;
+	/*width: 194px;*/
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -31,7 +31,8 @@
 }
 .profile-dropdown{
 	margin-top: 15px;
-	width: 194px;
+	
+	/*width: 194px;*/
 	border:none;
 }
 .link{
@@ -40,12 +41,12 @@
 }
 
 .link:active{
-	color:#fa6000;
+	
 	outline: none;
 	background-color: white; !important;
 }
 .link:focus{
-	color:#fa6000;
+	
 	outline: none;
 	background-color: white; !important;
 }

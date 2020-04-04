@@ -39,77 +39,89 @@
 			</div>
 		</div>
 	</div>
-	<nav class="navbar fixed-top navbar-light bg-light">
-		<div class="navbar-brand">
+	<nav class="navbar fixed-top navbar-light bg-light" style="">
+		<div class="navbar-brand" >
+			<h3 class="user-and-project-title">
+				<a href="{{url_for('index')}}" class="main-title navbar-brand">Take<span class="main-title-orange">Start</span></a>
+				<div style="margin-right: 10%;">
+					|
+				</div>
+				<div class="" style="" >
 
-			<a href="{{url_for('index')}}" class="main-title navbar-brand" >Take<span class="main-title-orange">Start</span></a>
+					<a href="#" class="link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></a>
+				</div>
+			</h3>
 		</div>
-		{% if is_login() != ''%}
-		<div class="dropdown">
-			<a class="btn btn dropdown-toggle shadow-lg bg-faded rounded profile-dropdown-link"  href="#" role="button" 
-			id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="">
-			<img src="{{url_for('static',filename='site-images/index.jpeg')}}" width="30" height="30" class="d-inline-block align-top" alt="">
-			<span class="profile-dropdown-text" style="">
-				{{current_user.nickname}}
-				{% set nickname=current_user.nickname %}
-			</span>
+
+			
+
+			{% if is_login() != ''%}
+			<div class="dropdown" style="">
+				<a class="btn btn dropdown-toggle shadow-lg bg-faded rounded profile-dropdown-link"  href="#" role="button" 
+				id="dropdownMenuLink" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" style="">
+				<img src="{{current_user.avatar}}" width="30" height="30" class="d-inline-block align-top" alt="">
+				<span class="profile-dropdown-text" style="">
+					<!--{{current_user.nickname}}-->
+					{% set nickname=current_user.nickname %}
+				</span>
+			</a>
+
+			<div class="dropdown-menu dropdown-menu-right shadow-lg bg-faded profile-dropdown" style="" aria-labelledby="dropdownMenuLink">
+				<a class="dropdown-item link" href="{{url_for('get_profile',username=nickname)}}">Profile</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item link" href="{{url_for('change_user')}}" data-toggle="modal" data-target="#staticBackdrop">Change account</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item link" href="{{url_for('security.logout')}}">Exit</a>
+			</div>
+		</div>
+		{% else %}
+
+		<a class="navbar-brand svg-link" href="{{url_for('security.login')}}">
+			<!--<img src="{{url_for('static',filename='/site-images/log-in.svg')}}" width="30" height="30" alt="">-->
+			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-in"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
 		</a>
-
-		<div class="dropdown-menu shadow-lg bg-faded profile-dropdown" style="" aria-labelledby="dropdownMenuLink">
-			<a class="dropdown-item link" href="{{url_for('get_profile',username=nickname)}}">Profile</a>
-			<div class="dropdown-divider"></div>
-			<a class="dropdown-item link" href="{{url_for('change_user')}}" data-toggle="modal" data-target="#staticBackdrop">Change account</a>
-			<div class="dropdown-divider"></div>
-			<a class="dropdown-item link" href="{{url_for('security.logout')}}">Exit</a>
-		</div>
-	</div>
-	{% else %}
-	<a class="navbar-brand svg-link" href="{{url_for('security.login')}}">
-		<!--<img src="{{url_for('static',filename='/site-images/log-in.svg')}}" width="30" height="30" alt="">-->
-		<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-in"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
-	</a>
-	{% endif %}
-</nav>
-<main>
-	{% block main %}
+		{% endif %}
+	</nav>
+	<main>
+		{% block main %}
 
 
-	{% endblock %}
+		{% endblock %}
 
-</main>	
-<footer class="page-footer font-small bg-light pt-4">
+	</main>	
+	<footer class="page-footer font-small bg-light pt-4">
 
-	<!-- Footer Links -->
-	<div class="container-fluid text-center text-md-center">
+		<!-- Footer Links -->
+		<div class="container-fluid text-center text-md-center">
 
-		<!-- Grid row -->
-		<div class="row">
+			<!-- Grid row -->
+			<div class="row">
 
+				<!-- Grid column -->
+
+				<div class="col">
+					<span class="main-title">For startupers <span class="main-title-orange">By startupers</span></span>
+					<div class="footer-copyright text-center bg-light py-3" style="">Support:
+						<a href="https://takestart.app/" class="link"> takestart.mail@gmail.com</a>
+					</div>
+					<div class="dropdown-divider"></div>
+
+					<!-- Copyright -->
+					<div class="footer-copyright text-center bg-light py-3" style="">© 2020 Copyright:
+						<a href="https://takestart.app/" class="link"> TakeStart.app</a>
+					</div>
+				</div>
+
+			</div>
 			<!-- Grid column -->
 
-			<div class="col">
-				<span class="main-title">For startupers <span class="main-title-orange">By startupers</span></span>
-				<div class="footer-copyright text-center bg-light py-3" style="">Support:
-					<a href="https://takestart.app/" class="link"> takestart.mail@gmail.com</a>
-				</div>
-				<div class="dropdown-divider"></div>
-
-				<!-- Copyright -->
-				<div class="footer-copyright text-center bg-light py-3" style="">© 2020 Copyright:
-					<a href="https://takestart.app/" class="link"> TakeStart.app</a>
-				</div>
-			</div>
-
 		</div>
-		<!-- Grid column -->
+		<!-- Grid row -->
 
 	</div>
-	<!-- Grid row -->
+	<!-- Footer Links -->
 
-</div>
-<!-- Footer Links -->
-
-<!-- Copyright -->
+	<!-- Copyright -->
 
 </footer>
 </body>
