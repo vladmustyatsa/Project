@@ -25,7 +25,7 @@ Sign in
               {% if not register_user_form.nickname.errors %}
               {{ render_field_with_errors(register_user_form.nickname,class="form-control",
               id='nickname',placeholder="Your nickname") }}
-              <small id="emailHelp" class="form-text text-muted">Only letters,ciphers, '-', '_' and '.'<br>(no more than 16 characters)</small>
+              <small id="nicknameHelp" class="form-text text-muted">Only letters,ciphers, '-', '_' and '.'<br>(no more than 16 characters)</small>
               {% else %}
               {{ render_field_with_errors(register_user_form.nickname,class="form-control is-invalid",
               id='nickname',placeholder="Your nickname") }}
@@ -46,7 +46,7 @@ Sign in
               {% if not register_user_form.password.errors %}
               {{ render_field_with_errors(register_user_form.password,class="form-control",id="password",placeholder="Password") }}
 
-              <small id="emailHelp" class="form-text text-muted">Password must be at least 6 characters</small>
+              <small id="passwordHelp" class="form-text text-muted">Password must be at least 6 characters</small>
               {% else %}
               {{ render_field_with_errors(register_user_form.password,class="form-control is-invalid",id="password",placeholder="Password") }}
               {% endif %}

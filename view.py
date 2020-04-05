@@ -1,7 +1,10 @@
+import os
 from flask import redirect, url_for, request, render_template, abort
+from flask import send_from_directory, make_response
 from flask_security import current_user, logout_user
 from app import app
 from models import User
+
 
 @app.route('/')
 def index():
@@ -35,6 +38,11 @@ def get_profile(username):
 def index1():
 	return render_template('base.html')
 
-@app.route('/test')
+@app.route('/test', methods=['GET','POST'])
 def test():
-	return render_template('test1.html')
+	if request.method == 'POST':
+		avatar_file = request.files['avatar_file']
+		filename = avatar_file.filename
+		avatar_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+		return make_response({'filename' : filename}, 200)
+	return render_template('test.html')
