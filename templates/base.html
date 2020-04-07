@@ -48,7 +48,7 @@
 				</div>
 				<div class="" style="" >
 
-					<a href="#" class="link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></a>
+					<a href="#" title="Startups" class="link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></a>
 				</div>
 			</h3>
 		</div>
@@ -59,7 +59,7 @@
 			<div class="dropdown" style="">
 				<a class="btn btn dropdown-toggle shadow-lg bg-faded rounded profile-dropdown-link"  href="#" role="button" 
 				id="dropdownMenuLink" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" style="">
-				<img src="{{current_user.avatar}}" width="30" height="30" class="d-inline-block align-top" alt="">
+				<img src="{{current_user.avatar}}" id="navbar_avatar" width="30" height="30" class="d-inline-block align-top" alt="">
 				<span class="profile-dropdown-text" style="">
 					<!--{{current_user.nickname}}-->
 					{% set nickname=current_user.nickname %}

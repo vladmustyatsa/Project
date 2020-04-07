@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block title %}
+Edit
+{% endblock %}
+{% block main %}
+{% from "security/_macros.html" import render_field_with_errors, render_field %}
+
+<script src="{{url_for('static',filename='js/upload_single_photo.js')}}" type="text/javascript" async></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/edit_profile.js')}}"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+		about_me = '{{about_me}}'
+		re = /&lt;/g
+		about_me = about_me.replace(re,'<')
+		re = /&gt;/g
+		about_me = about_me.replace(re,'>')
+		re = /&#34;/g
+		about_me = about_me.replace(re,'"')
+		upload_single_photo('/edit');
+
+		$('#about_me').val(about_me)
+});
+
+</script>
+
+<div class="container">
+	<div class="row shadow-lg p-3 mb-5 bg-white rounded">
+		<div class="col-sm" style="margin-top: 6%;margin-bottom: 4%">
+			<h1>Edit account</h1>
+			<div class="row" >
+				<div class="col-sm-2">
+					<form enctype="multipart/form-data" >
+						<input class="is-invalid"  accept="image/*" id="avatar_input" type="file" name="avatar_file" style="display: none">
+
+						<img onclick="avatar_input.click();" src="{{avatar_path}}" style="margin-top: 6%" class="ts-image ts-image-edit" width="150" height="184" id="avatar_view">
+
+					</form>
+				</div>
+
+				<div class="col-sm-10">
+
+					<form action="{{url_for('edit')}}" method="post">
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="form-group">
+									{% if not form.nickname.errors %}
+									{{ render_field_with_errors(form.nickname,class="form-control",
+									id='nickname',placeholder="Your nickname", value=nickname) }}
+									<small id="nicknameHelp" class="form-text text-muted">Only letters,ciphers, '-', '_' and '.'<br>(no more than 16 characters)</small>
+									{% else %}
+									{{ render_field_with_errors(form.nickname,class="form-control is-invalid",
+									id='nickname',placeholder="Your nickname") }}
+									{% endif %}
+								</div>
+								<div class="form-group">
+									{% if not form.email.errors %}
+									{{ render_field_with_errors(form.email,class="form-control",
+									id='email',placeholder="Your email", value=email) }}
+									{% else %}
+									{{ render_field_with_errors(form.email,class="form-control is-invalid",
+									id='email',placeholder="Your email") }}
+									{% endif %}
+								</div>
+								<div class="form-group">
+									<a href="{{url_for('security.change_password')}}" class="link">Change password</a>
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn my-button">Change</button>
+								</div>
+								{% include "security/_messages.html" %}
+
+							</div>
+							<div class="col-sm-8">
+								
+								{% if not form.about_me.errors %}
+								{{ render_field_with_errors(form.about_me, class="form-control",rows='14',spellcheck="false",maxlength="1000") }}
+								<small id="emailHelp" class="form-text text-muted">No more than 1000 characters</small>
+								{%else%}
+
+								{{ render_field_with_errors(form.about_me, class="form-control is-invalid",rows='14',spellcheck="false",maxlength="1000") }}
+
+								{% endif %}
+							</div>
+						</div>
+					</form>
+					<button class="btn btn-danger ts-btn-danger" style="margin-left: 84%;margin-top:1%">Delete account</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
