@@ -4,9 +4,29 @@ Edit
 {% endblock %}
 {% block main %}
 {% from "security/_macros.html" import render_field_with_errors, render_field %}
-
+<div class="modal fade" id="deleteAccount" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title main-title ts-label-danger" id="deleteLabel">Delete account</h5>
+					<button type="button" class="close casual-button" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<label class="main-title">You really wanna <span class="ts-label-danger">delete your account</span>, don't you?</label>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-light casual-button" data-dismiss="modal">Exit</button>
+					
+					<button type="button" id="delete_button" class="btn  ts-btn-danger">Delete account</button>
+					
+				</div>
+			</div>
+		</div>
+	</div>
 <script src="{{url_for('static',filename='js/upload_single_photo.js')}}" type="text/javascript" async></script>
-<script type="text/javascript" src="{{url_for('static',filename='js/edit_profile.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/edit_profile.js')}}" async></script>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -17,8 +37,10 @@ $(document).ready(function() {
 		about_me = about_me.replace(re,'>')
 		re = /&#34;/g
 		about_me = about_me.replace(re,'"')
+		re = /&#39;/g
+		about_me = about_me.replace(re,"'")
 		upload_single_photo('/edit');
-
+		delete_model('/edit')
 		$('#about_me').val(about_me)
 });
 
@@ -84,7 +106,7 @@ $(document).ready(function() {
 							</div>
 						</div>
 					</form>
-					<button class="btn btn-danger ts-btn-danger" style="margin-left: 84%;margin-top:1%">Delete account</button>
+					<button class="btn btn-danger ts-btn-danger"  data-toggle="modal" data-target="#deleteAccount" style="margin-left: 84%;margin-top:1%">Delete account</button>
 				</div>
 			</div>
 		</div>

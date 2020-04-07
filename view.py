@@ -32,8 +32,9 @@ def get_profile(username):
 	avatar_file = user.avatar
 	return render_template('profile.html',nickname=nickname,about=about,avatar_file=avatar_file)
 
-@login_required
+
 @app.route('/edit',methods=['GET','POST'])
+@login_required
 def edit():
 	if request.method == 'POST':
 		status = request.form.get('status')
@@ -51,6 +52,11 @@ def edit():
 			db.session.commit()
 			print('[INFO] :: Success setting new avatar')
 			return make_response({'filename' : filename}, 200)
+		elif status == 'delete':
+			print('[INFO]::STATUS DELETE')
+			db.session.delete(user)
+			db.session.commit()
+			return make_response('Success',200)
 		else:
 			form = ExtendedRegisterForm(request.form)
 			is_nick_edit = False

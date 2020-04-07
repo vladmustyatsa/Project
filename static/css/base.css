@@ -144,6 +144,9 @@
 	background-color: #980024;	
 
 }
+.ts-label-danger{
+	color: #a61000;
+}
 .user-and-project-title{
 	display: flex;
 }
