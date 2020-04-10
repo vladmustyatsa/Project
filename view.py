@@ -131,10 +131,4 @@ def index1():
 
 @app.route('/test', methods=['GET','POST'])
 def test():
-	if request.method == 'POST':
-		avatar_file = request.files['avatar_file']
-		filename = avatar_file.filename
-		avatar_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-		print('[INFO] :: Success')
-		return make_response({'filename' : filename}, 200)
 	return render_template('test.html')

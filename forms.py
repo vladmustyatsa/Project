@@ -28,7 +28,7 @@ class ExtendedRegisterForm(RegisterForm):
         user = User.query.filter_by(
             nickname=self.nickname.data).first()
         if user is not None and is_edit:
-            print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+            
             # Text displayed to the user
             self.nickname.errors.append('Nickname already exists')
             is_valid = False

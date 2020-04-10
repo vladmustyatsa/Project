@@ -1,59 +1,15 @@
-{% extends 'base.html' %}
-{% block title %}
-Edit
-{% endblock %}
+{% extends 'base.html' %} 
 {% block main %}
-<script src="{{url_for('static',filename='js/upload_single_photo.js')}}" type="text/javascript" async></script>
-<script type="text/javascript" src="{{url_for('static',filename='js/edit_profile.js')}}" async></script>
-<div class="container">
-    <div class="row shadow-lg p-3 mb-5 bg-white rounded">
-        <div class="col-sm" style="margin-top: 5%;margin-bottom: 4%">
-            <h1>Edit account</h1>
-            <div class="row" >
-                <div class="col-sm-2">
-                    <form enctype="multipart/form-data" >
-                        <input class="is-invalid"  accept="image/*" id="avatar_input" type="file" name="avatar_file" style="display: none">
-
-                        <img onclick="avatar_input.click();"src="{{url_for('static',filename='site-images/index.jpeg')}}" style="margin-top: 6%" class="ts-image ts-image-edit" width="150" height="184" id="avatar_view">
-                        
-                  </form>
-              </div>
-
-              <div class="col-sm-10">
-
-                <form action="#" >
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Email</label>
-                                <input type="Email" class="form-control" id="exampleInputPassword1" placeholder="Email" value="lox">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Nickname</label>
-                                <input type="Email" class="form-control" id="exampleInputPassword1" placeholder="Nickname">
-                            </div>
-                            <div class="form-group">
-                                <a href="#" class="link">Change password</a>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn my-button">Change</button>
-                            </div>
-
-                        </div>
-                        <div class="col-sm-8">
-                            <label>About</label>
-                            <textarea class="form-control" rows=14>
-
-                            </textarea>
-                        </div>
-                    </div>
-                </form>
-                <button class="btn btn-danger ts-btn-danger" style="margin-left: 84%;margin-top:1%">Delete account</button>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
+<select id="select" class="form-control" multiple>
+  <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
+  <option data-tokens="mustard">Burger, Shake and a Smile</option>
+  <option data-tokens="frosting">Sugar, Spice and all things nice</option>
+</select>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/tail.select@latest/js/tail.select.min.js"></script>
+<script type="text/javascript">
+   tail.select('#select',{
+    search: true
+   });
+</script>
 
 {% endblock %}
-

@@ -13,14 +13,5 @@ def get_ending(filename):
 	ending = ending[::-1]
 	return ending
 
-'''def create_links(text, start_s):
-	#indexes = [m.start() for m in re.finditer(start_s, s)]
-	try:
-		index = text.index(start_s)
-		s = text[:index]
-		link = text[index:text[index+1:].index(' ')+len(s)]
-		s += f'<a href="{link}">{link}</a>'
-		s += text[text.index(link)+len(link):]
-		return create_links(s, start_s)
-	except ValueError:
-		return text'''
+
+
