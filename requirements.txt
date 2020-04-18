@@ -7,3 +7,5 @@ flask-admin
 mysql-connector
 flask-mail
 wtforms
+
+pip install flask flask-sqlalchemy flask-migrate flask-script flask-security flask-admin mysql-connector flask-mail wtforms

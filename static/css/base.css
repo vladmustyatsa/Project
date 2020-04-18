@@ -43,17 +43,36 @@
 .link:active{
 	
 	outline: none;
-	background-color: white; !important;
+	background-color: white !important;
 }
 .link:focus{
 	
 	outline: none;
-	background-color: white; !important;
+	background-color: white !important;
 }
 .link:hover{
 	color:#fa6000;
 	outline: none;
 }
+
+.ts-option{
+	font-family: 'Noto Sans Regular',sans-serif;
+}
+.ts-option:hover{
+	color:#fa6000 !important;
+	outline: none;
+}
+.ts-option:active{
+		font-color:#fa6000;
+		outline: none;
+		background-color: white !important;
+	}
+	.ts-option:focus{
+		font-color:#fa6000;
+		outline: none;
+		background-color: white !important;
+	}
+
 .my-button{
 	color: white;
 	border: none;
@@ -205,6 +224,7 @@ a svg:hover{
 	textarea{
 		resize: none;
 	}
+
 
 
 	

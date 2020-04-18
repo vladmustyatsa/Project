@@ -28,14 +28,17 @@ def get_profile(username):
 	if not user:
 		abort(404)
 	nickname = user.nickname
+	print(nickname)
 	about = user.about_me
 	avatar_file = user.avatar
-	return render_template('profile.html',nickname=nickname,about=about,avatar_file=avatar_file)
+	return render_template('for_user_model/profile.html',nickname=nickname,about=about,avatar_file=avatar_file)
 
 
 @app.route('/edit',methods=['GET','POST'])
 @login_required
 def edit():
+	#BotVasy
+	bot = User.query.filter_by(nickname='BotVasy').first()
 	if request.method == 'POST':
 		status = request.form.get('status')
 		user = User.query.filter(User.nickname==current_user.nickname).first()
@@ -54,6 +57,10 @@ def edit():
 			return make_response({'filename' : filename}, 200)
 		elif status == 'delete':
 			print('[INFO]::STATUS DELETE')
+
+			#db.session.add(bot)
+			for project in user.ownprojects:
+				project.admin = bot
 			db.session.delete(user)
 			db.session.commit()
 			return make_response('Success',200)
@@ -97,7 +104,7 @@ def edit():
 				print(f'[DEBUG]:: {avatar_path}')
 				about_me = current_user.about_me
 				
-				return render_template('edit_profile.html',
+				return render_template('for_user_model/edit_profile.html',
 					form=form,
 					nickname=nickname,
 					email=email,
@@ -114,7 +121,7 @@ def edit():
 	about_me = current_user.about_me
 	
 	print(f'[DEBUG]::input about {about_me}')
-	return render_template('edit_profile.html',
+	return render_template('for_user_model/edit_profile.html',
 		form=form,
 		nickname=nickname,
 		email=email,
@@ -125,7 +132,7 @@ def edit():
 
 #---------------------------------
 
-@app.route('/p')
+@app.route('/base')
 def index1():
 	return render_template('base.html')
 

@@ -42,4 +42,3 @@ admin.add_view(UserAdminView(User, db.session))
 
 # Mail
 mail = Mail(app)
-

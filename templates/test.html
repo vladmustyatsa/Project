@@ -1,15 +1,57 @@
 {% extends 'base.html' %} 
 {% block main %}
-<select id="select" class="form-control" multiple>
-  <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
-  <option data-tokens="mustard">Burger, Shake and a Smile</option>
-  <option data-tokens="frosting">Sugar, Spice and all things nice</option>
-</select>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/tail.select@latest/js/tail.select.min.js"></script>
-<script type="text/javascript">
-   tail.select('#select',{
-    search: true
-   });
-</script>
+<script type="text/javascript" src="{{url_for('static',filename='js/test.js')}}"></script>
+<div class="container">
+	<div class="row shadow-lg p-3 mb-5 bg-white rounded" >
+		<div class="col-sm">
+			<form action="#" class="signup-form">
+
+				<h1>Create project</h1>
+				<div class="form-group" id="tag_list" style="margin-bottom: 0px">
+
+				</div>
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="team_name">Team name</label>
+							<input type="text" class="form-control" id="team_name" placeholder="Team name">
+						</div>
+						
+
+						
+						
+						<select id="tags" class="selectpicker" data-live-search="true" data-selected-text-format="count" data-size="6" multiple
+						data-width="100%">
+						  <option class="ts-option" data-tokens="cosmos">#cosmos</option>
+						  <option class="ts-option" data-tokens="dance">#dance</option>
+						  <option class="ts-option" data-tokens="science">#science</option>
+						  <option class="ts-option" data-tokens="work">#work</option>
+						  <option class="ts-option" data-tokens="program">#program</option>
+						  <option class="ts-option" data-tokens="games">#games</option>
+						</select>
+						<!--<img src="{{url_for('static',filename='site-images/chevrons-up.svg')}}" width="100%"  class="ts-image ts-image-edit" width="100%" >-->
+						<svg xmlns="http://www.w3.org/2000/svg" class="ts-image ts-image-edit" width="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"></polyline><polyline points="17 18 12 13 7 18"></polyline></svg>
+
+
+						
+
+					</div>
+					<div class="col-sm-8">
+						<div class="form-group">
+							<label for="project_name">Project name</label>
+							<input type="text" class="form-control" id="project_name" placeholder="Project name">
+						</div>
+						<div class="form-group">
+							<label for="about">About project</label>
+							<textarea class="form-control" id="about" rows="14"></textarea> 
+						</div>
+					</div>	
+
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
 
 {% endblock %}

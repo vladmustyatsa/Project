@@ -6,10 +6,12 @@ function delete_model(url) {
 			'status':'delete'
 		},
 		function(){
+
 			window.location = '/'
 		}
 
 		);
+
 	});
 }
 
