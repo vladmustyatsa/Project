@@ -63,15 +63,20 @@
 	outline: none;
 }
 .ts-option:active{
-		font-color:#fa6000;
-		outline: none;
-		background-color: white !important;
-	}
-	.ts-option:focus{
-		font-color:#fa6000;
-		outline: none;
-		background-color: white !important;
-	}
+	font-color:#fa6000;
+	outline: none;
+	background-color: white !important;
+}
+.ts-option:focus{
+	font-color:#fa6000;
+	outline: none;
+	background-color: white !important;
+}
+.active{
+	color:#fa6000 !important;
+	outline: none;
+	background-color: white !important;
+}
 
 .my-button{
 	color: white;

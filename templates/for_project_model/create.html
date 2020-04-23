@@ -1,0 +1,88 @@
+{% extends 'base.html' %} 
+{% block title %}
+Create project
+{% endblock %}
+{% from "security/_macros.html" import render_field_with_errors, render_field %}
+{% block main %}
+<script type="text/javascript" src="{{url_for('static',filename='js/for_project_model/create.js')}}"></script>
+<div class="container">
+	<div class="row shadow-lg p-3 mb-5 bg-white rounded" >
+		<div class="col-sm">
+			<form action="#" method="post" class="signup-form" style="margin-bottom: 0%;margin-top: 1%">
+
+				<h1>Create <span class="main-title-orange">your project</span></h1>
+				<div class="form-group" id="tag_list" style="margin-bottom: 0px">
+					<a href="#"></a>
+				</div>
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="form-group">
+							<!--<label for="team_name">Team name</label>
+							<input type="text" class="form-control" id="team_name" placeholder="Team name">
+							 <small id="teamnameHelp" class="form-text text-muted">Only letters,ciphers, '-', '_' and '.'<br>(no more than 16 characters)</small>-->
+							{% if not form.team_name.errors%}
+								{{render_field_with_errors(form.team_name,class="form-control",placeholder="Team name")}}
+								<small id="teamnameHelp" class="form-text text-muted">Only letters,ciphers, '-', '_' and '.'<br>(no more than 16 characters)</small>
+							{% else %}
+								{{render_field_with_errors(form.team_name,class="form-control is-invalid",placeholder="Team name")}}
+							{% endif%}
+							
+						</div>
+						
+
+						
+						<label for="tags">Tags</label>
+						<select id="tags" class="selectpicker" name="tags" data-live-search="true" data-selected-text-format="count" data-size="6" multiple
+						data-width="100%" required>
+						{% for tag in tags%}
+						 	<option class="ts-option" data-tokens="{{tag.name}}" value="{{tag.name}}" {%if tag.name in form.selected_tags%}selected{%endif%}>
+						  		#{{tag.name}}
+							</option>
+						  
+						{% endfor %}
+						</select>
+
+						<!--{{form.tags(class="selectpicker",data_live_search="true",data_selected_text_format="count", data_size="6",data_width="100%")}}-->
+						<!--<img src="{{url_for('static',filename='site-images/chevrons-up.svg')}}" width="100%"  class="ts-image ts-image-edit" width="100%" >-->
+						<svg xmlns="http://www.w3.org/2000/svg" class="ts-image ts-image-edit" width="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"></polyline><polyline points="17 18 12 13 7 18"></polyline></svg>
+						
+
+
+						
+
+					</div>
+					<div class="col-sm-8">
+						<div class="form-group">
+							<!--<label for="project_name">Project name</label>
+							<input type="text" class="form-control" id="project_name" maxlength="80" placeholder="Project name">-->
+							{% if not form.project_name.errors%}
+								{{render_field_with_errors(form.project_name,class="form-control",id="project_name",placeholder="Project name")}}
+								<small id="projectnameHelp" class="form-text text-muted">Name of your project<br>(at least 6 characters and no more than 80 characters)
+								</small>
+							{% else %}
+								{{render_field_with_errors(form.project_name,class="form-control is-invalid",id="project_name",placeholder="Project name")}}
+							{% endif %}
+						</div>
+						<div class="form-group">
+							<!--<label for="about">About project</label>
+							<textarea class="form-control" id="about" rows="14" spellcheck="false" maxlength="1000"></textarea>-->
+							{% if not form.about.errors %}
+								{{render_field_with_errors(form.about,class="form-control",id="about", rows="13", spellcheck="false")}}
+								<small id="emailHelp" class="form-text text-muted">No more than 1000 characters</small>
+							{% else %}
+								{{render_field_with_errors(form.about,class="form-control is-invalid",id="about", rows="13", spellcheck="false")}}
+							{% endif %}
+							
+						</div>
+
+						<button type="submit" class="btn my-button" style="margin-left: 88.5%">Create</button>
+					</div>	
+
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
+
+{% endblock %}

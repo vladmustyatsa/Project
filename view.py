@@ -5,8 +5,8 @@ from flask_security import current_user, logout_user
 from flask_login import login_required
 from flask_wtf import Form
 from app import app, db
-from models import User
-from forms import ExtendedRegisterForm
+from models import User, Tag, Project
+from forms import ExtendedRegisterForm, ProjectForm
 from additional import randomString, get_ending
 
 @app.route('/')
@@ -17,6 +17,7 @@ def index():
 def not_found(e):
 	return render_template('404.html'), 404
 
+# For user model
 @app.route('/change-user')
 def change_user():
 	logout_user()
@@ -131,11 +132,42 @@ def edit():
 
 
 #---------------------------------
+#For project model
 
+@app.route('/projects/create', methods=['GET','POST'])
+@login_required
+def create_project():
+	form = ProjectForm()
+	if form.validate_on_submit():
+		team_name = form.team_name.data
+		project_name = form.project_name.data
+		selected_tags = form.tags.data
+		about = form.about.data
+		user = User.query.filter_by(nickname=current_user.nickname).first()
+
+		project = Project(team_name=team_name,
+						  project_name=project_name,
+						  about=about,
+						  admin=user
+		)
+
+		for tag in selected_tags:
+			t = Tag.query.filter_by(name=tag).first()
+			project.tags.append(t)
+		db.session.add(project)
+		db.session.commit()
+		return redirect(url_for('index'))
+
+	tags = Tag.query.all()
+	return render_template('for_project_model/create.html',form=form,tags=tags)
+
+
+#--------------------------
 @app.route('/base')
 def index1():
 	return render_template('base.html')
 
 @app.route('/test', methods=['GET','POST'])
 def test():
-	return render_template('test.html')
+	form = ProjectForm()
+	return render_template('test.html',form=form)

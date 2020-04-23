@@ -49,7 +49,7 @@ project_tags = db.Table('project_tags',
 class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)  
     team_name = db.Column(db.String(16), unique=True)
-    project_name = db.Column(db.String(50), unique=True)
+    project_name = db.Column(db.String(80), unique=True)
     about = db.Column(db.String(1000))
     create_date = db.Column(db.DateTime)
 
@@ -67,4 +67,7 @@ class Project(db.Model):
 class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(16), unique=True)
-        
+    
+    def __init__(self, *args, **kwargs):
+        super(Tag, self).__init__(*args,**kwargs)
+        self.name = self.name.replace('#','')

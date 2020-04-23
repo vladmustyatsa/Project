@@ -8,19 +8,20 @@
 
 				<h1>Create project</h1>
 				<div class="form-group" id="tag_list" style="margin-bottom: 0px">
-
+					<a href="#"></a>
 				</div>
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="form-group">
 							<label for="team_name">Team name</label>
 							<input type="text" class="form-control" id="team_name" placeholder="Team name">
+							 <small id="teamnameHelp" class="form-text text-muted">Only letters,ciphers, '-', '_' and '.'<br>(no more than 16 characters)</small>
 						</div>
 						
 
 						
-						
-						<select id="tags" class="selectpicker" data-live-search="true" data-selected-text-format="count" data-size="6" multiple
+						<label for="tags">Tags</label>
+						<select id="tags" class="selectpicker" name="tags" data-live-search="true" data-selected-text-format="count" data-size="6" multiple
 						data-width="100%">
 						  <option class="ts-option" data-tokens="cosmos">#cosmos</option>
 						  <option class="ts-option" data-tokens="dance">#dance</option>
@@ -29,6 +30,7 @@
 						  <option class="ts-option" data-tokens="program">#program</option>
 						  <option class="ts-option" data-tokens="games">#games</option>
 						</select>
+						<!--{{form.tags(class="selectpicker",data_live_search="true",data_selected_text_format="count", data_size="6",data_width="100%")}}-->
 						<!--<img src="{{url_for('static',filename='site-images/chevrons-up.svg')}}" width="100%"  class="ts-image ts-image-edit" width="100%" >-->
 						<svg xmlns="http://www.w3.org/2000/svg" class="ts-image ts-image-edit" width="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"></polyline><polyline points="17 18 12 13 7 18"></polyline></svg>
 
@@ -39,11 +41,11 @@
 					<div class="col-sm-8">
 						<div class="form-group">
 							<label for="project_name">Project name</label>
-							<input type="text" class="form-control" id="project_name" placeholder="Project name">
+							<input type="text" class="form-control" id="project_name" maxlength="80" placeholder="Project name">
 						</div>
 						<div class="form-group">
 							<label for="about">About project</label>
-							<textarea class="form-control" id="about" rows="14"></textarea> 
+							<textarea class="form-control" id="about" rows="14" spellcheck="false" maxlength="1000"></textarea> 
 						</div>
 					</div>	
 
