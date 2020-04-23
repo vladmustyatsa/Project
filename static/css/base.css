@@ -36,6 +36,7 @@
 	border:none;
 }
 .link{
+
 	font-family: 'Noto Sans Regular',sans-serif;
 	display:inline;
 }
@@ -53,6 +54,29 @@
 .link:hover{
 	color:#fa6000;
 	outline: none;
+}
+.project-link{
+
+	color: grey;/* #269926;*/
+	font-family: 'Noto Sans Regular',sans-serif;
+	display:inline;
+}
+
+.project-link:active{
+	
+	outline: none;
+	background-color: white !important;
+}
+.project-link:focus{
+	
+	outline: none;
+	background-color: white !important;
+}
+.project-link:hover{
+
+	color:#005018;
+	outline: none;
+	text-decoration: none;
 }
 
 .ts-option{

@@ -156,7 +156,7 @@ def create_project():
 			project.tags.append(t)
 		db.session.add(project)
 		db.session.commit()
-		return redirect(url_for('index'))
+		return redirect(url_for('index')) #!!!!!Change 
 
 	tags = Tag.query.all()
 	return render_template('for_project_model/create.html',form=form,tags=tags)

@@ -52,7 +52,7 @@ class Project(db.Model):
     project_name = db.Column(db.String(80), unique=True)
     about = db.Column(db.String(1000))
     create_date = db.Column(db.DateTime)
-
+    avatar = db.Column(db.String(100))
     admin_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     subscribers = db.relationship('User', secondary=project_subscribers, backref=db.backref('subscriptions',lazy='dynamic'))
     members = db.relationship('User', secondary=project_members, backref=db.backref('myprojects',lazy='dynamic'))
