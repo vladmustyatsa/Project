@@ -13,34 +13,14 @@ User
 				</button>
 			</div>
 			<div class="modal-body">
-
+				{% for sub in subs%}
 				<form action="#">
-					<img src="{{url_for('static',filename='/site-images/index.jpeg')}}" class="ts-image" width="50" height="60">
-					<a href="#">Loxteam1</a>
+					<img src="{{sub.logo}}" class="ts-image" width="50" height="50">
+					<a href="/projects/{{sub.team_name}}" class="link">&lt;{{sub.team_name}}&gt;team</a>
 					<button type="submit" class="btn btn-danger btn-sm ts-btn-danger">Unsubscribe</button>
+					<div class="dropdown-divider"></div>
 				</form>
-				<div class="dropdown-divider"></div>
-				<img src="{{url_for('static',filename='/site-images/index.jpeg')}}" class="ts-image" width="50" height="60">
-				<a href="#">Loxteam2</a>
-				<div class="dropdown-divider"></div>
-				<img src="{{url_for('static',filename='/site-images/index.jpeg')}}" class="ts-image" width="50" height="60">
-				<a href="#">Loxteam2</a>
-				<div class="dropdown-divider"></div>
-				<img src="{{url_for('static',filename='/site-images/index.jpeg')}}" class="ts-image" width="50" height="60">
-				<a href="#">Loxteam2</a>
-				<div class="dropdown-divider"></div>
-				<img src="{{url_for('static',filename='/site-images/index.jpeg')}}" class="ts-image" width="50" height="60">
-				<a href="#">Loxteam2</a>
-				<div class="dropdown-divider"></div>
-				<img src="{{url_for('static',filename='/site-images/index.jpeg')}}" class="ts-image" width="50" height="60">
-				<a href="#">Loxteam2</a>
-				<div class="dropdown-divider"></div>
-				<img src="{{url_for('static',filename='/site-images/index.jpeg')}}" class="ts-image" width="50" height="60">
-				<a href="#">Loxteam2</a>
-				<div class="dropdown-divider"></div>
-				<img src="{{url_for('static',filename='/site-images/index.jpeg')}}" class="ts-image" width="50" height="60">
-				<a href="#">Loxteam2</a>
-
+				{% endfor %}
 			</div>
 
 		</div>
@@ -73,10 +53,9 @@ User
 					{% endif %}
 					</h2>
 						<div style="margin-bottom: 1%;">
-							<a href="#" class="project-link">&lt;asd1&gt;team</a>
-							<a href="#" class="project-link">&lt;asd2&gt;team</a>
-							<a href="#" class="project-link">&lt;asd3&gt;team</a>
-							<a href="#" class="project-link">&lt;asd4&gt;team</a>
+							{% for project in projects%}
+							<a href="/projects/{{project.team_name}}" class="project-link">&lt;{{project.team_name}}&gt;team</a>
+							{% endfor %}
 							
 						</div>
 						<button type="button" class="btn  btn-block my-button" data-toggle="modal" data-target="#follow">Subscriptions</button>

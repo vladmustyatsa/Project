@@ -3,14 +3,54 @@
 &lt;Gintoniel&gt;team
 {% endblock %}
 {% block main %}
-<script type="text/javascript" src="{{url_for('static',filename='js/test.js')}}"></script>
-<div class="container">
-	<div class="row shadow-lg p-3 mb-5 bg-white rounded" >
-		<div class="col-sm">
-			<a href="#" class="project-link">&lt;gofgof&gt;team</a>
 
-		</div>
-	</div>
-</div>
+<div class="container" style="margin-top: 1%">
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-sm-10">
+			<div class="row shadow-lg p-3 mb-5 bg-white rounded">
+				<div class="col-sm">
+					<div class="row" style="margin-left: 0%">
+						<div style="display: inline-flex;">
+							<img src="{{url_for('static',filename='site-images/default-project-logo.jpg')}}" class="ts-image" width="70px" height="70px">
+							<div>
+								<h1 style="margin-top: 0%;height: 35%" class="main-title">Someone</h1>
+								<span class="text-muted" style="margin-bottom: 0%">150000 subscribers</span></div>
+								{% if False %}
+								<a style="margin-top: 5%" class="" href="#">
+									<svg  xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></a>
+									{% elif  True%}
+									<div>
+										<button class="my-button" style="height: 80%;margin-top: 1%">Subscribe</button>
+										<button class="my-button ts-warn-button" style="height: 80%">Join</butttom>
+										</div>
+										{% endif %}
 
-{% endblock %}
+									</div>
+								</div>
+								<div class="row" style="margin-top: 1%">
+									<div class="col-sm-6" >
+										<h4>Members</h4>
+										<ul class="list-group" style="height:250px;overflow: auto;">
+											<li class="list-group-item"><a href="#" class="link">Cras justo odio</a></li>
+											<li class="list-group-item"><a href="#" class="link">Dapibus ac facilisis in</a></li>
+											<li class="list-group-item"><a href="#" class="link">Morbi leo risus</a></li>
+											<li class="list-group-item"><a href="#" class="link">Porta ac consectetur ac</a></li>
+											<li class="list-group-item"><a href="#" class="link">Vestibulum at eros</a></li>
+											<li class="list-group-item"><a href="#" class="link">Cras justo odio</a></li>
+											<li class="list-group-item"><a href="#" class="link">Dapibus ac facilisis in</a></li>
+											<li class="list-group-item"><a href="#" class="link">Morbi leo risus</a></li>
+											<li class="list-group-item"><a href="#" class="link">Porta ac consectetur ac</a></li>
+											<li class="list-group-item"><a href="#" class="link">Vestibulum at eros</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			{% endblock %}

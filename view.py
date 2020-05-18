@@ -32,7 +32,14 @@ def get_profile(username):
 	print(nickname)
 	about = user.about_me
 	avatar_file = user.avatar
-	return render_template('for_user_model/profile.html',nickname=nickname,about=about,avatar_file=avatar_file)
+	subs = user.subscriptions
+	projects = user.myprojects
+	return render_template('for_user_model/profile.html',
+							nickname=nickname,
+							about=about,
+							avatar_file=avatar_file,
+							subs=subs,
+							projects=projects)
 
 
 @app.route('/edit',methods=['GET','POST'])
@@ -148,18 +155,27 @@ def create_project():
 		project = Project(team_name=team_name,
 						  project_name=project_name,
 						  about=about,
-						  admin=user
+						  admin=user,
+						  logo=url_for('static', filename='site-images/default-project-logo.jpg')
 		)
 
+		project.members.append(user)
 		for tag in selected_tags:
 			t = Tag.query.filter_by(name=tag).first()
 			project.tags.append(t)
 		db.session.add(project)
 		db.session.commit()
-		return redirect(url_for('index')) #!!!!!Change 
+		return redirect(url_for('get_project',p=project.team_name)) #!!!!!Change 
 
 	tags = Tag.query.all()
 	return render_template('for_project_model/create.html',form=form,tags=tags)
+
+@app.route('/projects/<p>')
+def get_project(p):
+	project = Project.query.filter_by(team_name=p).first()
+	if project:
+		return render_template('for_project_model/project_page.html', project=project)
+	abort(404)
 
 
 #--------------------------
@@ -169,5 +185,4 @@ def index1():
 
 @app.route('/test', methods=['GET','POST'])
 def test():
-	form = ProjectForm()
-	return render_template('test.html',form=form)
+	return render_template('test.html')

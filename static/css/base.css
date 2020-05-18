@@ -136,6 +136,19 @@
 	outline: none !important;
 
 }
+
+.ts-warn-button{
+	background-color: #FFB000;
+}
+
+.ts-warn-button:hover{
+	background-color: #FF9900;
+}
+
+.ts-warn-button:focus,.ts-warn-button:active{
+	background-color: #FF9900 !important;
+}
+
 .casual-button:focus{
 	outline: 0!important;
 	outline-color: transparent!important;
@@ -228,6 +241,14 @@ a svg:hover{
 		flex: 0 0 auto;
 	}
 	label{
+		font-family: 'Source Sans Pro Regular',sans-serif;
+	}
+	
+	h4{
+		font-family: 'Source Sans Pro Regular',sans-serif;
+	}
+
+	span{
 		font-family: 'Source Sans Pro Regular',sans-serif;
 	}
 

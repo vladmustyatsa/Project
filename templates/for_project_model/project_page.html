@@ -1,6 +1,76 @@
 {% extends 'base.html' %}
 {% block title %}
-&lt;Gintoniel&gt;team
+&lt;{{project.team_name}}&gt;team
 {% endblock %}
 {% block main %}
+<div class="container" style="margin-top: 1%">
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-sm-10">
+			<div class="row shadow-lg p-3 mb-5 bg-white rounded">
+				<div class="col-sm">
+					<div class="row" style="margin-left: 0%">
+						<div style="display: inline-flex;">
+							<img src="{{project.logo}}" class="ts-image" width="70px" height="70px">
+							<div>
+								<h1 style="margin-top: 0%;height: 35%" class="main-title">{{project.team_name}}</h1>
+								<span class="text-muted" style="margin-bottom: 0%">{{project.subscribers.__len__()}} subscribers</span></div>
+								{% if current_user == project.admin %}
+								<a style="margin-top: 5%" class="link" href="#">
+									<svg  xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></a>
+									{% else%}
+									<div>
+										{% if current_user not in project.subscribers %}
+											<button class="my-button" style="height: 80%;margin-top: 1%">Subscribe</button>
+										{% else %}
+											<button class="btn-secondary casual-button" style="height: 80%;margin-top: 1%;border:none !important;" >Subscribe</button>
+										{% endif%}
+										{% if current_user not in project.members %}
+											<button class="my-button ts-warn-button" style="height: 80%">Join</butttom>
+										{% else %}
+											<button class="btn-secondary casual-button" style="height: 80%;margin-top: 1%;border:none !important;">Join</button>
+										{% endif%}
+									</div>
+								{% endif %}
+
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
+										<span class="text-muted" style="">{{project.project_name}}</span>
+										<small class="text-muted">created {{project.create_date}}</small>
+										<div>
+											{% for tag in project.tags%}
+												<a href="#" class="link">#{{tag.name}}</a>
+											{% endfor %}
+										</div>
+									</div>
+								</div>
+								<div class="row" style="margin-top: 1%">
+									<div class="col-sm-6">
+										<h4>Members {{project.members.__len__()}}</h4>
+										<ul class="list-group" style="height:250px;overflow: auto;">
+
+											{% for member in project.members %}
+												{% if member == project.admin %}
+												<li class="list-group-item">
+													<a href="/users/{{member.nickname}}" class="link">{{member.nickname}}</a>
+													<span class="text-muted" style="margin-left: 69%;">Admin</span>
+												</li>
+												{% else %}
+												<li class="list-group-item">
+													<a href="/users/{{member.nickname}}" class="link">{{member.nickname}}</a>
+												</li>
+												{% endif %}
+											{% endfor %}
+										</ul>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
 {% endblock %}
