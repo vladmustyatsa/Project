@@ -207,20 +207,8 @@ def edit_project(p):
 				return make_response({'filename' : filename}, 200)
 			else:
 				validation = Form.validate(form)
-				is_team_name_edit = False
-				if project.team_name != request.form['team_name']:
-					is_team_name_edit = True
 
-				is_valid = True
-				if not form.team_name_validate(is_team_name_edit):
-					is_valid = False
-				if not form.project_name_validate():
-					is_valid = False
-				if not form.about_validate():
-					is_valid = False
-				form.selected_tags = form.tags.data
-
-				if is_valid:
+				if form.validate(instance=project):
 					project.team_name = form.team_name.data
 					project.project_name = form.project_name.data
 					project.tags.clear()

@@ -49,7 +49,7 @@ project_tags = db.Table('project_tags',
 class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)  
     team_name = db.Column(db.String(16), unique=True)
-    project_name = db.Column(db.String(80), unique=True)
+    project_name = db.Column(db.String(80))
     about = db.Column(db.String(1000))
     create_date = db.Column(db.DateTime)
     logo = db.Column(db.String(100))

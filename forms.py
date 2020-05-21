@@ -112,7 +112,7 @@ class ProjectForm(FlaskForm):
         self.tags.choices = choices
         
 
-    def team_name_validate(self, is_edit=True):
+    def team_name_validate(self, instance):
         is_valid_team_name = re.search(r'^[a-zA-Z][a-zA-Z0-9-_\.]{1,15}$',self.team_name.data)
         is_valid = True
         if not is_valid_team_name:
@@ -122,11 +122,12 @@ class ProjectForm(FlaskForm):
         if self.team_name.data == 'create':
             self.team_name.errors.append('Banned name')
             is_valid = False
-        # Check if nickname already exists       
+        # Check if nickname already exists  
+        
         project = Project.query.filter_by(
             team_name=self.team_name.data).first()
-        if project is not None and is_edit:
-            
+        if project is not None and (instance == None or instance.team_name != self.team_name.data):
+                
             # Text displayed to the user
             self.team_name.errors.append('Project already exists')
             is_valid = False
@@ -149,7 +150,7 @@ class ProjectForm(FlaskForm):
         print(f'[INFO] :: about_validate - {is_valid}')
         return is_valid
 
-    def validate(self):
+    def validate(self, instance=None):
         url = request.url
         url = url.replace(app.config['app_server_name'],'')
         print(f'[INFO] URL: {url}')
@@ -157,7 +158,7 @@ class ProjectForm(FlaskForm):
         is_valid = True
         
         print(f'[INFO]::selected tags :: {self.tags.data}')
-        if not self.team_name_validate():
+        if not self.team_name_validate(instance):
             is_valid = False
         if not self.project_name_validate():
             is_valid = False
