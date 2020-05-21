@@ -1,17 +1,25 @@
 {% extends 'base.html' %} 
 {% block title %}
-Create project
+Edit project
 {% endblock %}
 {% from "security/_macros.html" import render_field_with_errors, render_field %}
 {% block main %}
 <script type="text/javascript" src="{{url_for('static',filename='js/for_project_model/create.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='js/edit_profile.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='js/upload_single_photo.js')}}"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	upload_single_photo(document.location);
+});
+</script>
 <div class="container">
 	<div class="row shadow-lg p-3 mb-5 bg-white rounded" >
 		<div class="col-sm">
 			<form action="#" method="post" class="signup-form" style="margin-bottom: 0%;margin-top: 1%">
 				<div style="display: inline-flex;">
-				<h1>Create <span class="main-title-orange">your project</span></h1>
-				<img src="{{url_for('static', filename='site-images/default-project-logo.jpg')}}" class="ts-image ts-image-edit" width="70px" height="70px">
+				<h1>Edit <span class="main-title-orange">your project</span></h1>
+				<img onclick="avatar_input.click();" id="avatar_view" src="{{logo}}" class="ts-image ts-image-edit" width="70px" height="70px">
+				<input class="is-invalid"  accept="image/*" id="avatar_input" type="file" name="avatar_file" style="display: none">
 				</div>
 				<div class="form-group" id="tag_list" style="margin-bottom: 0px">
 					<a href="#"></a>
@@ -31,12 +39,12 @@ Create project
 							
 						</div>
 						
-
-						
 						<label for="tags">Tags</label>
 						<select id="tags" class="selectpicker" name="tags" data-live-search="true" data-selected-text-format="count" data-size="6" multiple
 						data-width="100%" required>
+
 						{% for tag in tags%}
+							
 						 	<option class="ts-option" data-tokens="{{tag.name}}" value="{{tag.name}}" {%if tag.name in form.selected_tags%}selected{%endif%}>
 						  		#{{tag.name}}
 							</option>
@@ -74,8 +82,10 @@ Create project
 							{% endif %}
 							
 						</div>
-
-						<button type="submit" class="btn my-button" style="margin-left: 88.5%">Create</button>
+						<div style="display: inline-flex;">
+							<button type="button" class="btn ts-btn-danger" style="margin-left: 404%">Delete</button>
+							<button type="submit" class="btn my-button" style="margin-left: 2%">Edit</button>
+						</div>
 					</div>	
 
 				</div>

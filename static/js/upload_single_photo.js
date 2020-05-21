@@ -3,9 +3,10 @@ function upload_single_photo(url) {
 	avatar_input.oninput = function() {
 		var formdata = new FormData();
 		file = $(this).prop('files')[0];
-		console.log(file['file']);
+		//console.log(file['file']);
 		formdata.append("avatar_file", file);
 		formdata.append("status", "for_avatar");
+
 		$.ajax({
 			url: url,
 			type: "POST",
@@ -16,7 +17,9 @@ function upload_single_photo(url) {
 				console.log(result);
 				var avatar_view = $('#avatar_view');
 				avatar_view.attr('src','/static/'+result['filename']);
-				$('#navbar_avatar').attr('src','/static/'+result['filename']);
+				if (window.location.pathname.indexOf('projects') === -1){
+					$('#navbar_avatar').attr('src','/static/'+result['filename']);
+				}
 			}
 		});
 

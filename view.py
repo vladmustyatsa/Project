@@ -156,10 +156,16 @@ def create_project():
 						  project_name=project_name,
 						  about=about,
 						  admin=user,
-						  logo=url_for('static', filename='site-images/default-project-logo.jpg')
+						  logo=url_for('static', filename=f'project_logos/{team_name}.jpg')
 		)
 
+		filename = form.team_name.data+'.jpg'
+		logo_file = open(os.getcwd()+'/static/project_logos/'+filename,'wb')
+		default_logo = open(os.getcwd()+'/static/site-images/'+'default-project-logo.jpg','rb')
+		logo_file.write(default_logo.read())
 		project.members.append(user)
+		logo_file.close()
+		default_logo.close()
 		for tag in selected_tags:
 			t = Tag.query.filter_by(name=tag).first()
 			project.tags.append(t)
@@ -177,6 +183,67 @@ def get_project(p):
 		return render_template('for_project_model/project_page.html', project=project)
 	abort(404)
 
+@app.route('/projects/<p>/edit', methods=['GET', 'POST'])
+@login_required
+def edit_project(p):
+	project = Project.query.filter_by(team_name=p).first()
+	if project.admin.nickname != current_user.nickname:
+		abort(403)
+	else:
+		form = ProjectForm()
+		if request.method == 'POST':
+			status = request.form.get('status')
+			if status == "for_avatar":
+				avatar_file = request.files['avatar_file']
+				filename = f'project_logos/{randomString(20)}{get_ending(avatar_file.filename)}'
+				print(f"[DEBUG]::{app.config['UPLOAD_FOLDER']}")
+
+				avatar_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+				os.remove(os.path.join(app.config['UPLOAD_FOLDER'],f"project_logos/{project.logo.replace('/static/project_logos','')}"))
+				project.logo = url_for('static',filename=filename)
+				db.session.commit()
+				print('[INFO] :: Success setting new project logo')
+				return make_response({'filename' : filename}, 200)
+			else:
+				validation = Form.validate(form)
+				is_team_name_edit = False
+				if project.team_name != request.form['team_name']:
+					is_team_name_edit = True
+
+				is_valid = True
+				if not form.team_name_validate(is_team_name_edit):
+					is_valid = False
+				if not form.project_name_validate():
+					is_valid = False
+				if not form.about_validate():
+					is_valid = False
+				form.selected_tags = form.tags.data
+
+				if is_valid:
+					project.team_name = form.team_name.data
+					project.project_name = form.project_name.data
+					project.tags.clear()
+					for tag in form.selected_tags:
+						t = Tag.query.filter_by(name=tag).first()
+						project.tags.append(t)
+					project.about = form.about.data
+					db.session.commit()
+					return redirect(url_for('get_project',p=project.team_name))
+				else:
+					tags = Tag.query.all()
+					logo = project.logo
+					return render_template('for_project_model/edit.html', form=form, tags=tags, logo=logo)
+					
+		form.team_name.data = project.team_name
+		form.project_name.data = project.project_name
+		form.tags.data = [i.name for i in project.tags]
+		form.about.data = project.about
+		form.selected_tags = [i.name for i in project.tags]
+		print(f'[DEBUG]::{form.selected_tags}')
+		tags = Tag.query.all()
+		logo = project.logo
+		return render_template('for_project_model/edit.html', form=form, tags=tags, logo=logo)
 
 #--------------------------
 @app.route('/base')
@@ -185,4 +252,5 @@ def index1():
 
 @app.route('/test', methods=['GET','POST'])
 def test():
-	return render_template('test.html')
+	form = ProjectForm()
+	return render_template('test.html', form=form)
