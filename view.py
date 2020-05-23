@@ -205,6 +205,12 @@ def edit_project(p):
 				db.session.commit()
 				print('[INFO] :: Success setting new project logo')
 				return make_response({'filename' : filename}, 200)
+			elif status == "delete":
+				print('[INFO] :: status - project deleted')
+				#!!! [WARNING]:: YOU MUST DELETE ALL POSTS, COMMENTS AND CHATS
+				db.session.delete(project)
+				db.session.commit()
+				return make_response('Success', 200)
 			else:
 				validation = Form.validate(form)
 
