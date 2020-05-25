@@ -81,12 +81,12 @@
 			<div class="dropdown-divider"></div>
 			<a class="dropdown-item link" href="{{url_for('change_user')}}" data-toggle="modal" data-target="#staticBackdrop">Change account</a>
 			<div class="dropdown-divider"></div>
-			<a class="dropdown-item link" href="{{url_for('security.logout')}}">Exit</a>
+			<a class="dropdown-item link" href="{{url_for('exit')}}">Exit</a>
 		</div>
 	</div>
 	{% else %}
 
-	<a class="navbar-brand svg-link" href="{{url_for('security.login')}}">
+	<a class="navbar-brand svg-link" href="{{url_for('signin_transfer')}}">
 		<!--<img src="{{url_for('static',filename='/site-images/log-in.svg')}}" width="30" height="30" alt="">-->
 		<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-in"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
 	</a>

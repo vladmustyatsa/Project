@@ -13,8 +13,8 @@ class User(db.Model, UserMixin):
     avatar = db.Column(db.String(100))
     active = db.Column(db.Boolean())#
 
-
     ownprojects = db.relationship('Project', backref='admin', lazy='dynamic')
+    ownrequests = db.relationship('ProjectUserRequest', backref='sender', lazy='dynamic')
 
 
     def __init__(self, *args, **kwargs):
@@ -58,11 +58,11 @@ class Project(db.Model):
     members = db.relationship('User', secondary=project_members, backref=db.backref('myprojects',lazy='dynamic'))
     tags = db.relationship('Tag', secondary=project_tags, backref=db.backref('projects',lazy='dynamic'))
 
+    requests = db.relationship('ProjectUserRequest', backref='project', lazy='dynamic')
     def __init__(self, *args, **kwargs):
         super(Project, self).__init__(*args,**kwargs)
         self.create_date = datetime.now()
         
-
 
 class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -71,3 +71,10 @@ class Tag(db.Model):
     def __init__(self, *args, **kwargs):
         super(Tag, self).__init__(*args,**kwargs)
         self.name = self.name.replace('#','')
+
+
+class ProjectUserRequest(db.Model):
+    id = db.Column(db.Integer, primary_key=True)   
+    sender_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    project_id = db.Column(db.Integer, db.ForeignKey('project.id'))
+

@@ -39,8 +39,8 @@ $(document).ready(function() {
 		about_me = about_me.replace(re,'"')
 		re = /&#39;/g
 		about_me = about_me.replace(re,"'")
-		upload_single_photo('/edit');
-		delete_model('/edit')
+		upload_single_photo('/edit/');
+		delete_model('/edit/')
 		$('#about_me').val(about_me)
 });
 

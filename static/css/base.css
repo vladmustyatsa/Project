@@ -55,6 +55,13 @@
 	color:#fa6000;
 	outline: none;
 }
+.link-muted{
+	color:grey;
+}
+.link-muted:focus, .link-muted:active{
+	outline: none;
+	background-color: #FFB000 !important;
+}
 .project-link{
 
 	color: grey;/* #269926;*/
@@ -147,6 +154,10 @@
 
 .ts-warn-button:focus,.ts-warn-button:active{
 	background-color: #FF9900 !important;
+}
+
+.ts-warn:hover,.ts-warn:focus,.ts-warn:active{
+	background-color: #FFB000 !important;
 }
 
 .casual-button:focus{

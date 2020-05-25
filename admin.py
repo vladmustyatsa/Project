@@ -8,7 +8,7 @@ class AdminMixin:
 	def is_accessible(self):
 		#return current_user.has_role('admin')
 		try:
-			return current_user.nickname == 'vasy'
+			return current_user.nickname == 'BotVasy'
 		except:
 			return False
 

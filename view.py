@@ -5,7 +5,7 @@ from flask_security import current_user, logout_user
 from flask_login import login_required
 from flask_wtf import Form
 from app import app, db
-from models import User, Tag, Project
+from models import User, Tag, Project, ProjectUserRequest
 from forms import ExtendedRegisterForm, ProjectForm
 from additional import randomString, get_ending
 
@@ -19,12 +19,21 @@ def not_found(e):
 	return render_template('404.html'), 404
 
 # For user model
-@app.route('/change-user')
+@app.route('/change-user/')
 def change_user():
 	logout_user()
 	return redirect(url_for('security.login',next=request.referrer))
 
-@app.route('/users/<username>')
+@app.route('/exit/')
+def exit():
+	logout_user()
+	return redirect(request.referrer)
+
+@app.route('/signin-transfer/')
+def signin_transfer():
+	return redirect(url_for('security.login',next=request.referrer))
+
+@app.route('/users/<username>/')
 def get_profile(username):
 	user = User.query.filter(User.nickname==username).first()
 	if not user:
@@ -43,7 +52,7 @@ def get_profile(username):
 							projects=projects)
 
 
-@app.route('/edit',methods=['GET','POST'])
+@app.route('/edit/',methods=['GET','POST'])
 @login_required
 def edit():
 	#BotVasy
@@ -70,6 +79,8 @@ def edit():
 			#db.session.add(bot)
 			for project in user.ownprojects:
 				project.admin = bot
+			if bot not in project.members:
+				project.members.insert(0, bot)
 			db.session.delete(user)
 			db.session.commit()
 			return make_response('Success',200)
@@ -142,7 +153,7 @@ def edit():
 #---------------------------------
 #For project model
 
-@app.route('/projects/create', methods=['GET','POST'])
+@app.route('/projects/create/', methods=['GET','POST'])
 @login_required
 def create_project():
 	form = ProjectForm()
@@ -177,7 +188,7 @@ def create_project():
 	tags = Tag.query.all()
 	return render_template('for_project_model/create.html',form=form,tags=tags)
 
-@app.route('/projects/<p>', methods=['GET', 'POST'])
+@app.route('/projects/<p>/', methods=['GET', 'POST'])
 def get_project(p):
 	project = Project.query.filter_by(team_name=p).first()
 	if project:
@@ -189,14 +200,40 @@ def get_project(p):
 					if user not in project.subscribers:
 						project.subscribers.append(user)
 						db.session.commit()
+						return {'status':'ok_subed'}
+					else:
+						project.subscribers.remove(user)
+						db.session.commit()
+						return {'status':'ok_unsubed'}
+					return {'status':None}
+				if status == 'join':
+					user = User.query.filter_by(nickname=current_user.nickname).first()
+					is_req_exist = ProjectUserRequest.query.filter_by(sender=user,project=project).first()
+					if user not in project.members and not is_req_exist:
+						user_request = ProjectUserRequest()
+						user_request.sender = user
+						user_request.project = project
+						db.session.commit()
+						return {'status':'ok'}
+					return {'status':None}
+				if status == 'delete_req':
+					user = User.query.filter_by(nickname=current_user.nickname).first()
+					req = ProjectUserRequest.query.filter_by(sender=user,project=project).first()
+					if req:
+						db.session.delete(req)
+						db.session.commit()
 						return {'status':'ok'}
 					return {'status':None}
 			else:
 				return {'status' : 'must_login','team_name':project.team_name}
-		return render_template('for_project_model/project_page.html', project=project)
+		already_made_request = False
+		if current_user.is_authenticated:
+			already_made_request = ProjectUserRequest.query.filter_by(sender=current_user,project=project).first()
+		return render_template('for_project_model/project_page.html', project=project,
+			already_made_request=already_made_request)
 	abort(404)
 
-@app.route('/api/unauthorized')
+@app.route('/api/unauthorized/')
 def api_unauthorized():
 	next_page = request.args.get('next')
 	message = request.args.get('message')
@@ -205,7 +242,7 @@ def api_unauthorized():
 		return redirect(url_for('security.login',next=next_page))
 	abort(404)
 
-@app.route('/projects/<p>/edit', methods=['GET', 'POST'])
+@app.route('/projects/<p>/edit/', methods=['GET', 'POST'])
 @login_required
 def edit_project(p):
 	project = Project.query.filter_by(team_name=p).first()
@@ -264,11 +301,11 @@ def edit_project(p):
 
 #--------------------------
 
-@app.route('/base')
+@app.route('/base/')
 def index1():
 	return render_template('base.html')
 
-@app.route('/test', methods=['GET','POST'])
+@app.route('/test/', methods=['GET','POST'])
 def test():
 	form = ProjectForm()
 	return render_template('test.html', form=form)
