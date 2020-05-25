@@ -3,6 +3,7 @@
 &lt;{{project.team_name}}&gt;team
 {% endblock %}
 {% block main %}
+<script type="text/javascript" src="{{url_for('static', filename='js/for_project_model/sub_and_join.js')}}"></script>
 <div class="container" style="margin-top: 1%">
 	<div class="row">
 		<div class="col-1"></div>
@@ -14,21 +15,27 @@
 							<img src="{{project.logo}}" class="ts-image" width="70px" height="70px">
 							<div>
 								<h1 style="margin-top: 0%;height: 35%" class="main-title">{{project.team_name}}</h1>
-								<span class="text-muted" style="margin-bottom: 0%">{{project.subscribers.__len__()}} subscribers</span></div>
+								<span class="text-muted" style="margin-bottom: 0%">
+									<span id="sub_counter">{{project.subscribers.__len__()}}</span> subscribers
+								</span>
+							</div>
 								{% if current_user == project.admin %}
 								<a style="margin-top: 5%" class="link" href="{{url_for('edit_project',p=project.team_name)}}">
 									<svg  xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></a>
 									{% else%}
 									<div>
 										{% if current_user not in project.subscribers %}
-											<button class="my-button" style="height: 80%;margin-top: 1%">Subscribe</button>
+											<button id="sub_btn" class="my-button" style="height: 80%;margin-top: 1%">Subscribe</button>
 										{% else %}
-											<button class="btn-secondary casual-button" style="height: 80%;margin-top: 1%;border:none !important;" >Subscribe</button>
+											<button id="sub_btn" class="btn-secondary casual-button" style="height: 80%;margin-top: 1%;
+											border:none !important;" disabled>Subscribe</button>
 										{% endif%}
+										
 										{% if current_user not in project.members %}
-											<button class="my-button ts-warn-button" style="height: 80%">Join</butttom>
+											<button id="join_btn" class="my-button ts-warn-button" style="height: 80%">Join</butttom>
 										{% else %}
-											<button class="btn-secondary casual-button" style="height: 80%;margin-top: 1%;border:none !important;">Join</button>
+											<button id="join_btn" class="btn-secondary casual-button" style="height: 80%;margin-top: 1%;
+											border:none !important;" disabled>Join</button>
 										{% endif%}
 									</div>
 								{% endif %}

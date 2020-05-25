@@ -15,11 +15,14 @@ User
 			<div class="modal-body">
 				{% for sub in subs%}
 				<form action="#">
-					<img src="{{sub.logo}}" class="ts-image" width="50" height="50">
-					<a href="/projects/{{sub.team_name}}" class="link">&lt;{{sub.team_name}}&gt;team</a>
+					<a href="/projects/{{sub.team_name}}" class="link"><img src="{{sub.logo}}" class="ts-image" width="50" height="50">&lt;{{sub.team_name}}&gt;team</a>
 					<button type="submit" class="btn btn-danger btn-sm ts-btn-danger">Unsubscribe</button>
 					<div class="dropdown-divider"></div>
 				</form>
+				{% else %}
+				<div class="text-center">
+					<span class="text-muted">{{nickname}} has't subscribed yet</span>
+				</div>
 				{% endfor %}
 			</div>
 

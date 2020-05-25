@@ -1,5 +1,5 @@
 import os
-from flask import redirect, url_for, request, render_template, abort
+from flask import redirect, url_for, request, render_template, abort, current_app, flash
 from flask import send_from_directory, make_response
 from flask_security import current_user, logout_user
 from flask_login import login_required
@@ -11,6 +11,7 @@ from additional import randomString, get_ending
 
 @app.route('/')
 def index():
+	print(request.referrer)
 	return render_template('home.html')
 
 @app.errorhandler(404)
@@ -21,7 +22,7 @@ def not_found(e):
 @app.route('/change-user')
 def change_user():
 	logout_user()
-	return redirect(url_for('security.login'))
+	return redirect(url_for('security.login',next=request.referrer))
 
 @app.route('/users/<username>')
 def get_profile(username):
@@ -176,11 +177,32 @@ def create_project():
 	tags = Tag.query.all()
 	return render_template('for_project_model/create.html',form=form,tags=tags)
 
-@app.route('/projects/<p>')
+@app.route('/projects/<p>', methods=['GET', 'POST'])
 def get_project(p):
 	project = Project.query.filter_by(team_name=p).first()
 	if project:
+		if request.method == "POST":
+			if current_user.is_authenticated:
+				status = request.form['status']
+				if status == 'sub':
+					user = User.query.filter_by(nickname=current_user.nickname).first()
+					if user not in project.subscribers:
+						project.subscribers.append(user)
+						db.session.commit()
+						return {'status':'ok'}
+					return {'status':None}
+			else:
+				return {'status' : 'must_login','team_name':project.team_name}
 		return render_template('for_project_model/project_page.html', project=project)
+	abort(404)
+
+@app.route('/api/unauthorized')
+def api_unauthorized():
+	next_page = request.args.get('next')
+	message = request.args.get('message')
+	if next_page and message:
+		flash(message)
+		return redirect(url_for('security.login',next=next_page))
 	abort(404)
 
 @app.route('/projects/<p>/edit', methods=['GET', 'POST'])
@@ -239,7 +261,9 @@ def edit_project(p):
 		logo = project.logo
 		return render_template('for_project_model/edit.html', form=form, tags=tags, logo=logo)
 
+
 #--------------------------
+
 @app.route('/base')
 def index1():
 	return render_template('base.html')
