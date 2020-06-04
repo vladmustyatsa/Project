@@ -39,6 +39,7 @@
 
 	font-family: 'Noto Sans Regular',sans-serif;
 	display:inline;
+	text-decoration: none !important;
 }
 
 .link:active{
@@ -62,6 +63,16 @@
 	outline: none;
 	background-color: #FFB000 !important;
 }
+
+.link-danger-muted:hover{
+	color:red;
+}
+
+.link-danger-muted:active, .link-danger-muted:focus{
+	outline: none;
+	background-color: white !important;
+}
+
 .project-link{
 
 	color: grey;/* #269926;*/
@@ -153,6 +164,12 @@
 }
 
 .ts-warn-button:focus,.ts-warn-button:active{
+	outline: 0!important;
+	outline-color: transparent!important;
+	outline-width: 0!important;
+	outline-style: none!important;
+	box-shadow: 0 0 0 0 rgba(0,123,255,0)!important;
+	outline: none !important;
 	background-color: #FF9900 !important;
 }
 

@@ -44,12 +44,14 @@ def get_profile(username):
 	avatar_file = user.avatar
 	subs = user.subscriptions
 	projects = user.myprojects
+	requests = ProjectUserRequest.query.filter_by(sender=user).all()
 	return render_template('for_user_model/profile.html',
 							nickname=nickname,
 							about=about,
 							avatar_file=avatar_file,
 							subs=subs,
-							projects=projects)
+							projects=projects,
+							requests=requests)
 
 
 @app.route('/edit/',methods=['GET','POST'])
@@ -238,6 +240,7 @@ def api_unauthorized():
 	next_page = request.args.get('next')
 	message = request.args.get('message')
 	if next_page and message:
+		print(f'[DEBUG]::{message}')
 		flash(message)
 		return redirect(url_for('security.login',next=next_page))
 	abort(404)

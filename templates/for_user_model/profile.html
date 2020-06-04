@@ -29,6 +29,32 @@
 		</div>
 	</div>
 </div>
+<div class="subsribes-modal modal fade " style="" id="req_modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" >
+			<div class="modal-header">
+				<h5 class="modal-title main-title" id="reqLabel">My requests</h5>
+				<button type="button" class="close casual-button" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				{% for req in requests%}
+				<form action="#">
+					<a href="/projects/{{req.project.team_name}}" class="link"><img src="{{req.project.logo}}" class="ts-image" width="50" height="50">&lt;{{req.project.team_name}}&gt;team</a>
+					<button type="submit" class="btn btn-danger btn-sm ts-btn-danger">Unsend</button>
+					<div class="dropdown-divider"></div>
+				</form>
+				{% else %}
+				<div class="text-center">
+					<span class="text-muted">You haven't sent any request</span>
+				</div>
+				{% endfor %}
+			</div>
+
+		</div>
+	</div>
+</div>
 <div class="container">
 	<div class="row">
 
@@ -48,10 +74,10 @@
 						
 						{% if is_login() %}
 						{% if current_user.nickname==nickname %}
-						
+							
 							<a class="navbar-brand svg-link"  href="{{url_for('edit')}}">
 							<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></a>
-						
+							
 						{%endif%}
 					{% endif %}
 					</h2>
@@ -61,7 +87,11 @@
 							{% endfor %}
 							
 						</div>
+
 						<button type="button" class="btn  btn-block my-button" data-toggle="modal" data-target="#follow">Subscriptions</button>
+						{% if current_user.nickname==nickname %}
+						<button class="btn my-button btn-block ts-warn-button" data-toggle="modal" data-target="#req_modal">My requests</button>
+						{% endif %}
 						{%if about%}
 						<div class="text-center">
 							<a class="link" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
