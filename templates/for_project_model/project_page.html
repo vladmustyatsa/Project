@@ -81,8 +81,11 @@
 											{% endfor %}
 										</ul>
 									</div>
+									{% if project.admin == current_user%}
 									<div class="col-sm-6">
-										<h4>Requests {{project.requests.all().__len__()}}</h4>
+										{% if project.requests.all().__len__() != 0%}
+											<h4>Requests {{project.requests.all().__len__()}}</h4>
+										{% endif %}
 										<ul class="list-group" style="height:250px;overflow: auto;">
 
 											{% for req in project.requests %}
@@ -96,6 +99,7 @@
 											{% endfor %}
 										</ul>
 									</div>
+									{%endif%}
 								</div>
 							</div>
 

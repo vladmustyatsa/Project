@@ -3,12 +3,13 @@
 {{nickname}}
 {% endblock %}
 {% block main %}
+<script type="text/javascript" src="{{url_for('static', filename='js/for_user_model/profile.js')}}"></script>
 <div class="subsribes-modal modal fade " style=""id="follow" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 	<div class="modal-dialog"  role="document">
 		<div class="modal-content" >
 			<div class="modal-header">
 				<h5 class="modal-title main-title" id="followLabel">Subsriptions</h5>
-				<button type="button" class="close casual-button" data-dismiss="modal" aria-label="Close">
+				<button type="button" id="0"class="close casual-button" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
@@ -38,13 +39,13 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body" id="reqs">
 				{% for req in requests%}
-				<form action="#">
+				<div id="{{req.project.team_name}}">
 					<a href="/projects/{{req.project.team_name}}" class="link"><img src="{{req.project.logo}}" class="ts-image" width="50" height="50">&lt;{{req.project.team_name}}&gt;team</a>
-					<button type="submit" class="btn btn-danger btn-sm ts-btn-danger">Unsend</button>
+					<button id="unsend_{{req.project.team_name}}" type="submit" class="btn btn-danger btn-sm ts-btn-danger">Unsend</button>
 					<div class="dropdown-divider"></div>
-				</form>
+				</div>
 				{% else %}
 				<div class="text-center">
 					<span class="text-muted">You haven't sent any request</span>
@@ -88,9 +89,9 @@
 							
 						</div>
 
-						<button type="button" class="btn  btn-block my-button" data-toggle="modal" data-target="#follow">Subscriptions</button>
+						<button type="button" class="btn  btn-block my-button" id="subs_btn" data-toggle="modal" data-target="#follow">Subscriptions</button>
 						{% if current_user.nickname==nickname %}
-						<button class="btn my-button btn-block ts-warn-button" data-toggle="modal" data-target="#req_modal">My requests</button>
+						<button class="btn my-button btn-block ts-warn-button" id="req_btn" data-toggle="modal" data-target="#req_modal">My requests</button>
 						{% endif %}
 						{%if about%}
 						<div class="text-center">

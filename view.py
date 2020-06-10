@@ -11,7 +11,6 @@ from additional import randomString, get_ending
 
 @app.route('/')
 def index():
-	print(request.referrer)
 	return render_template('home.html')
 
 @app.errorhandler(404)
@@ -33,8 +32,23 @@ def exit():
 def signin_transfer():
 	return redirect(url_for('security.login',next=request.referrer))
 
-@app.route('/users/<username>/')
+@app.route('/users/<username>/', methods=['GET', 'POST'])
 def get_profile(username):
+	if request.method == 'POST':
+		status = request.form['status']
+		if status == 'unsend':
+			project_team_name = request.form['project']
+			print(f'[DEBUG]:: {project_team_name}')
+			project = Project.query.filter_by(team_name=project_team_name).first()
+			req = ProjectUserRequest.query.filter_by(sender=current_user, project=project).first()
+			if req:
+				db.session.delete(req)
+				db.session.commit()
+				print('Successfully deleted')
+				return {'status': 'req_deleted'}
+			else:
+				return {'status': 'error'}
+
 	user = User.query.filter(User.nickname==username).first()
 	if not user:
 		abort(404)
