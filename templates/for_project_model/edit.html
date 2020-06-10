@@ -38,6 +38,7 @@ $(document).ready(function() {
 	<div class="row shadow-lg p-3 mb-5 bg-white rounded" >
 		<div class="col-sm">
 			<form action="#" method="post" class="signup-form" style="margin-bottom: 0%;margin-top: 1%">
+				{{ form.hidden_tag() }}
 				<div style="display: inline-flex;">
 				<h1>Edit <span class="main-title-orange">your project</span></h1>
 				<img onclick="avatar_input.click();" id="avatar_view" src="{{logo}}" class="ts-image ts-image-edit" width="70px" height="70px">
