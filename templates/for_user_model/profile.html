@@ -15,9 +15,11 @@
 			</div>
 			<div class="modal-body">
 				{% for sub in subs%}
-				<form action="#">
+				<form action="{{url_for('get_profile', username=nickname)}}" method="POST">
 					<a href="/projects/{{sub.team_name}}" class="link"><img src="{{sub.logo}}" class="ts-image" width="50" height="50">&lt;{{sub.team_name}}&gt;team</a>
 					<button type="submit" class="btn btn-danger btn-sm ts-btn-danger">Unsubscribe</button>
+					<input name="project" value="{{sub.team_name}}" style="display: none;">
+					<input name="status" value="delete_subscription" style="display: none;">
 					<div class="dropdown-divider"></div>
 				</form>
 				{% else %}

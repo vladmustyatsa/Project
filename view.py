@@ -48,6 +48,15 @@ def get_profile(username):
 				return {'status': 'req_deleted'}
 			else:
 				return {'status': 'error'}
+		elif status == 'delete_subscription':
+			user = User.query.filter_by(nickname=username).first()
+			if current_user == user:
+				project_team_name = request.form['project']
+				project = Project.query.filter_by(team_name=project_team_name).first()
+				if project:
+					user.subscriptions.remove(project)
+					db.session.commit()
+
 
 	user = User.query.filter(User.nickname==username).first()
 	if not user:
@@ -240,6 +249,22 @@ def get_project(p):
 						db.session.commit()
 						return {'status':'ok'}
 					return {'status':None}
+				if status == 'add_member':
+					nickname = request.form['user']
+					user = User.query.filter_by(nickname=nickname).first()
+					req = ProjectUserRequest.query.filter_by(sender=user,project=project).first()
+					if user and req:
+						project.members.append(user)
+						db.session.delete(req) ### !!!!!!! MUST BE CHANGED WITH STATUS REQUEST
+						db.session.commit()
+				if status == 'not_add_member':
+					nickname = request.form['user']
+					user = User.query.filter_by(nickname=nickname).first()
+					req = ProjectUserRequest.query.filter_by(sender=user,project=project).first()
+					if user and req:
+						db.session.delete(req)
+						db.session.commit()
+
 			else:
 				return {'status' : 'must_login','team_name':project.team_name}
 		already_made_request = False
