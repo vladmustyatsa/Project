@@ -68,6 +68,7 @@ def get_profile(username):
 	subs = user.subscriptions
 	projects = user.myprojects
 	requests = ProjectUserRequest.query.filter_by(sender=user).all()
+	requests = list(filter(lambda req: not req.positive_status, requests))
 	return render_template('for_user_model/profile.html',
 							nickname=nickname,
 							about=about,
@@ -104,8 +105,10 @@ def edit():
 			#db.session.add(bot)
 			for project in user.ownprojects:
 				project.admin = bot
-			if bot not in project.members:
-				project.members.insert(0, bot)
+				if bot not in project.members:
+					project.members.insert(0, bot)
+			for req in user.ownrequests.all():
+				db.session.delete(req)
 			db.session.delete(user)
 			db.session.commit()
 			return make_response('Success',200)
@@ -255,7 +258,7 @@ def get_project(p):
 					req = ProjectUserRequest.query.filter_by(sender=user,project=project).first()
 					if user and req:
 						project.members.append(user)
-						db.session.delete(req) ### !!!!!!! MUST BE CHANGED WITH STATUS REQUEST
+						req.positive_status = True
 						db.session.commit()
 				if status == 'not_add_member':
 					nickname = request.form['user']
@@ -267,11 +270,12 @@ def get_project(p):
 
 			else:
 				return {'status' : 'must_login','team_name':project.team_name}
+		requests_length = len(list(filter(lambda req: not req.positive_status, project.requests.all())))
 		already_made_request = False
 		if current_user.is_authenticated:
 			already_made_request = ProjectUserRequest.query.filter_by(sender=current_user,project=project).first()
 		return render_template('for_project_model/project_page.html', project=project,
-			already_made_request=already_made_request)
+			already_made_request=already_made_request,requests_length=requests_length)
 	abort(404)
 
 @app.route('/api/unauthorized/')

@@ -77,4 +77,5 @@ class ProjectUserRequest(db.Model):
     id = db.Column(db.Integer, primary_key=True)   
     sender_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'))
+    positive_status = db.Column(db.Boolean(), default=False)
 
