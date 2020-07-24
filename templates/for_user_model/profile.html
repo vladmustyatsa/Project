@@ -62,6 +62,23 @@
 	<div class="row">
 
 		<div class="col-sm-5 shadow-lg p-3 mb-5 bg-white rounded">
+			{% if current_user.nickname == nickname %}
+			<div class="row">
+				<div class="col">
+					{% with joined_messages = get_flashed_messages(category_filter=["joined"]), errors = get_flashed_messages(category_filter=["error"]) %}
+					  {% if joined_messages %}
+					  	{% for joined_message in joined_messages %}
+					  		<div class="alert alert-success" role="alert">
+								  {{joined_message}}
+								</div>
+					  	{% endfor %}
+					  {% endif %}
+					{% endwith %}
+				</div>
+			</div>
+			{% endif %}
+
+
 			<div class="row">
 				<div class="col-sm-4">
 					<img src="{{avatar_file}}" style="margin-top: 6%" class="ts-image" width="150" height="184">

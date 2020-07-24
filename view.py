@@ -1,4 +1,5 @@
 import os
+import re
 from flask import redirect, url_for, request, render_template, abort, current_app, flash
 from flask import send_from_directory, make_response
 from flask_security import current_user, logout_user
@@ -67,15 +68,29 @@ def get_profile(username):
 	avatar_file = user.avatar
 	subs = user.subscriptions
 	projects = user.myprojects
-	requests = ProjectUserRequest.query.filter_by(sender=user).all()
-	requests = list(filter(lambda req: not req.positive_status, requests))
+	all_requests = ProjectUserRequest.query.filter_by(sender=user).all()
+	requests = list(filter(lambda req: not req.positive_status, all_requests))
+	pos_requests = list(filter(lambda req: req.positive_status, all_requests))
+	if pos_requests:
+		template = 'Congratulations! You have joined to '
+		for req in pos_requests:
+			template += f'<{req.project.team_name}>team'
+			if req == pos_requests[-1]:
+				template += '.'
+			else:
+				template += ', '
+			db.session.delete(req)
+		db.session.commit()
+		flash(template, 'joined')
+
 	return render_template('for_user_model/profile.html',
 							nickname=nickname,
 							about=about,
 							avatar_file=avatar_file,
 							subs=subs,
 							projects=projects,
-							requests=requests)
+							requests=requests,
+							pos_requests=pos_requests)
 
 
 @app.route('/edit/',methods=['GET','POST'])
@@ -313,6 +328,8 @@ def edit_project(p):
 			elif status == "delete":
 				print('[INFO] :: status - project deleted')
 				#!!! [WARNING]:: YOU MUST DELETE ALL POSTS, COMMENTS AND CHATS
+				for req in project.requests:
+					db.session.delete(req)
 				db.session.delete(project)
 				db.session.commit()
 				return make_response('Success', 200)
