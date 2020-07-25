@@ -20,6 +20,8 @@ class User(db.Model, UserMixin):
     def __init__(self, *args, **kwargs):
         super(User, self).__init__(*args, **kwargs)
 
+    def __repr__(self):
+        return f'<User #{self.id}, nickname={self.nickname}, email={self.email}>'
 
     @hybrid_property
     def roles(self):
@@ -59,9 +61,13 @@ class Project(db.Model):
     tags = db.relationship('Tag', secondary=project_tags, backref=db.backref('projects',lazy='dynamic'))
 
     requests = db.relationship('ProjectUserRequest', backref='project', lazy='dynamic')
+
     def __init__(self, *args, **kwargs):
         super(Project, self).__init__(*args,**kwargs)
         self.create_date = datetime.now()
+
+    def __repr__(self):
+        return f'<Project #{self.id}, team_name={self.team_name}, admin={self.admin}, created at {self.create_date}>'
         
 
 class Tag(db.Model):
@@ -72,10 +78,16 @@ class Tag(db.Model):
         super(Tag, self).__init__(*args,**kwargs)
         self.name = self.name.replace('#','')
 
+    def __repr__(self):
+        return f'<Tag #{self.id}, name={self.name}>'
+
 
 class ProjectUserRequest(db.Model):
     id = db.Column(db.Integer, primary_key=True)   
     sender_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'))
     positive_status = db.Column(db.Boolean(), default=False)
+
+    def __repr__(self):
+        return f'<ProjectUserRequest #{self.id}, \nsender={self.sender}, \nproject={self.project}, \npositive_status={self.positive_status}>'
 
