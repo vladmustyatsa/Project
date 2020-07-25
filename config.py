@@ -24,7 +24,7 @@ class Configuration:
 	MAIL_PORT = 465
 	MAIL_USE_SSL = True
 	MAIL_USERNAME = 'takestart.mail@gmail.com'
-	MAIL_PASSWORD = 'takestartpassword'
+	MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
 	MAIL_USE_TLS = False
 	#DEFAULT_MAIL_SENDER='Danny from DPC'
 	SECURITY_EMAIL_SENDER = 'takestart.mail@gmail.com'
