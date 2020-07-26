@@ -39,7 +39,8 @@ project_subscribers = db.Table('project_subscribers',
 
 project_members = db.Table('project_members',
                       db.Column('project_id', db.Integer, db.ForeignKey('project.id')),
-                      db.Column('user_id', db.Integer, db.ForeignKey('user.id'))
+                      db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+                      db.PrimaryKeyConstraint('project_id', 'user_id')
                       )
 
 project_tags = db.Table('project_tags',
@@ -67,8 +68,7 @@ class Project(db.Model):
         self.create_date = datetime.now()
 
     def __repr__(self):
-        return f'<Project #{self.id}, team_name={self.team_name}, admin={self.admin}, created at {self.create_date}>'
-        
+        return f'<Project #{self.id}, team_name={self.team_name}, admin={self.admin}, created at {self.create_date}>\n'
 
 class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -89,5 +89,5 @@ class ProjectUserRequest(db.Model):
     positive_status = db.Column(db.Boolean(), default=False)
 
     def __repr__(self):
-        return f'<ProjectUserRequest #{self.id}, \nsender={self.sender}, \nproject={self.project}, \npositive_status={self.positive_status}>'
+        return f'<ProjectUserRequest #{self.id}, \nsender={self.sender}, \nproject={self.project}, \npositive_status={self.positive_status}>\n'
 

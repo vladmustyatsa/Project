@@ -63,7 +63,6 @@ def get_profile(username):
 	if not user:
 		abort(404)
 	nickname = user.nickname
-	print(nickname)
 	about = user.about_me
 	avatar_file = user.avatar
 	subs = user.subscriptions
