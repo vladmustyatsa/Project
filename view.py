@@ -281,6 +281,14 @@ def get_project(p):
 					if user and req:
 						db.session.delete(req)
 						db.session.commit()
+				if status == 'quit_from_team':
+					user = User.query.filter_by(nickname=current_user.nickname).first()
+					req	 = ProjectUserRequest.query.filter_by(sender=user,project=project).first()
+					if req:
+						db.session.delete(req)
+					if user in project.members:
+						project.members.remove(user)
+					db.session.commit()
 
 			else:
 				return {'status' : 'must_login','team_name':project.team_name}

@@ -53,6 +53,7 @@ $(document).ready(function() {
 				$('#join_btn').addClass('ts-warn');
 				$('#join_btn').css({'border':'none', 'color':'grey'});
 				$('#join_text').text('Request was sent');
+				$('#join_btn').css({'height': '80%', 'margin-top': '0.9%'});
 				$('#delete_req').css({'display':'inline'});
 				$('#join_btn').attr('disabled','');
 			}

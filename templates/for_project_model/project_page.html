@@ -19,126 +19,133 @@
 									<span id="sub_counter">{{project.subscribers.__len__()}}</span> subscribers
 								</span>
 							</div>
-								{% if current_user == project.admin %}
-								<a style="margin-top: 5%" class="link" href="{{url_for('edit_project',p=project.team_name)}}">
-									<svg  xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></a>
-									{% else%}
-									<div>
-										{% if current_user not in project.subscribers %}
-											<button id="sub_btn" class="my-button" style="height: 80%;margin-top: 1%">Subscribe</button>
-										{% else %}
-											<button id="sub_btn" class="btn-secondary casual-button" style="height: 80%;margin-top: 1%;
-											border:none !important;" >Subscribe</button>
-										{% endif%}
-										
-										{% if current_user not in project.members and not already_made_request%}
-											<button id="join_btn" class="my-button ts-warn-button" style="height: 80%">
-											<span id='join_text'>Join</span>
-											<svg id="delete_req" class="link link-muted" style="display:none;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-											</butttom>
-										{% else %}
-											{% if already_made_request %}
-												{% if not already_made_request.positive_status %}
-												<button id="join_btn" class="my-button ts-warn-button ts-warn" style="height: 80%;margin-top: 1%;
-												border:none !important;color:grey" disabled><span id='join_text'>Request was sent</span>
-												<svg id="delete_req" class="link link-muted" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-												</button>
-												{% else %}
-													<button  class="btn-secondary casual-button" style="height: 80%;margin-top: 1%;
-												border:none !important;" >Join</button>
-												
-												{% endif %}
-											{% else %}
-												<button  class="btn-secondary casual-button" style="height: 80%;margin-top: 1%;
-											border:none !important;" >Join</button>
-											{%endif%}
-											
-										{% endif%}
-									</div>
+							{% if current_user == project.admin %}
+							<a style="margin-top: 5%" class="link" href="{{url_for('edit_project',p=project.team_name)}}">
+								<svg  xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></a>
+								{% else%}
+								<div style="display: inline-flex;">
+									{% if current_user not in project.subscribers %}
+									<button id="sub_btn" class="my-button" style="height: 80%;margin-top: 1%">Subscribe</button>
+									{% else %}
+									<button id="sub_btn" class="btn-secondary casual-button" style="height: 80%;margin-top: 1%;
+									border:none !important;" >Subscribe</button>
+									{% endif%}
+
+									{% if current_user not in project.members and not already_made_request%}
+
+									<button id="join_btn" class="my-button ts-warn-button" style="height: 81%; margin-top: 0.9%;">
+										<span id='join_text'>Join</span>
+										<svg id="delete_req" class="link link-muted" style="display:none;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+									</button>
+									{% else %}
+									{% if already_made_request %}
+									{% if not already_made_request.positive_status %}
+									<button id="join_btn" class="my-button ts-warn-button ts-warn" style="height: 80%; margin-top: 0.9%;
+									border:none !important;color:grey" disabled><span id='join_text'>Request was sent</span>
+									<svg id="delete_req" class="link link-muted" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+								</button>
+								{% else %}
+								<form action="{{url_for('get_project', p=project.team_name)}}" method="POST" style="margin-top: 0.7%;">
+									<button  class="btn-secondary casual-button" style="height: 80%;margin-top: 2%;
+									border:none !important;">Join</button>
+									<input name="status" value="quit_from_team" style="display: none;">
+								</form>
+
 								{% endif %}
+								{% else %}
+								<form action="{{url_for('get_project', p=project.team_name)}}" method="POST" style="margin-top: 0.7%;">
+									<button  class="btn-secondary casual-button" style="height: 80%;margin-top: 2%;
+									border:none !important;">Join</button>
+									<input name="status" value="quit_from_team" style="display: none;">
+								</form>
+								{%endif%}
 
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-6">
-										<span class="text-muted" style="">{{project.project_name}}</span>
-										<small class="text-muted">created {{project.create_date}}</small>
-										<div>
-											{% for tag in project.tags%}
-												<a href="#" class="link">#{{tag.name}}</a>
-											{% endfor %}
-										</div>
-									</div>
-								</div>
-								<div class="row" style="margin-top: 1%">
-									<div class="col-sm-6">
-										<h4>Members {{project.members.__len__()}}</h4>
-										<ul class="list-group" style="height:250px;overflow: auto;">
-
-											{% for member in project.members %}
-												{% if member == project.admin %}
-												<li class="list-group-item">
-													<a href="/users/{{member.nickname}}" class="link"><img class="ts-image" src={{member.avatar}} 
-														width="50px" height="50px">
-													{{member.nickname}}</a>
-													<span class="text-muted" style="margin-left: 45%;">Admin</span>
-												</li>
-												{% else %}
-												<li class="list-group-item">
-													<a href="/users/{{member.nickname}}" class="link"><img class="ts-image" src={{member.avatar}} width="50px" height="50px">{{member.nickname}}
-													</a>
-												</li>
-												{% endif %}
-											{% endfor %}
-										</ul>
-									</div>
-									{% if project.admin == current_user%}
-									<div class="col-sm-6">
-										{% if requests_length != 0%}
-											<h4>Requests {{requests_length}}</h4>
-										{% endif %}
-										<ul class="list-group" ><!--style="height:250px;overflow: auto;">-->
-
-											{% for req in project.requests %}
-												{% if not req.positive_status %}
-												<li class="list-group-item" id="req_by_{{req.sender}}">
-													<div class="row">
-													<div class="col-10">
-														<a href="/users/{{req.sender.nickname}}" class="link"><img class="ts-image" src={{req.sender.avatar}} width="50px" height="50px">{{req.sender.nickname}}</a>
-													</div>
-													<div class="col-2">
-													<form action="{{url_for('get_project', p=project.team_name)}}" method="post">
-													<button style="" class="none-button">
-													<a>
-													<svg id="add_member" class="ok-link" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-square"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
-													</a>
-													</button>
-													<input name="user" value="{{req.sender.nickname}}" style="display: none;">
-													<input name="status" value="add_member" style="display: none;">
-													</form>
-
-													<form action="{{url_for('get_project', p=project.team_name)}}" method="post">
-													<button style="" class="none-button">
-													<svg id="delete_sp_req" class="link link-muted link-danger-muted" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-													</button>
-
-													<input name="user" value="{{req.sender.nickname}}" style="display: none;">
-													<input name="status" value="not_add_member" style="display: none;">
-													</form>
-													</div>
-													</div>
-												</li>
-												{% endif %}
-											{% endfor %}
-										</ul>
-									</div>
-									{%endif%}
-								</div>
+								{% endif%}
 							</div>
+							{% endif %}
 
 						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<span class="text-muted" style="">{{project.project_name}}</span>
+							<small class="text-muted">created {{project.create_date}}</small>
+							<div>
+								{% for tag in project.tags%}
+								<a href="#" class="link">#{{tag.name}}</a>
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+					<div class="row" style="margin-top: 1%">
+						<div class="col-sm-6">
+							<h4>Members {{project.members.__len__()}}</h4>
+							<ul class="list-group" style="height:250px;overflow: auto;">
 
+								{% for member in project.members %}
+								{% if member == project.admin %}
+								<li class="list-group-item">
+									<a href="/users/{{member.nickname}}" class="link"><img class="ts-image" src={{member.avatar}} 
+										width="50px" height="50px">
+									{{member.nickname}}</a>
+									<span class="text-muted" style="margin-left: 45%;">Admin</span>
+								</li>
+								{% else %}
+								<li class="list-group-item">
+									<a href="/users/{{member.nickname}}" class="link"><img class="ts-image" src={{member.avatar}} width="50px" height="50px">{{member.nickname}}
+									</a>
+								</li>
+								{% endif %}
+								{% endfor %}
+							</ul>
+						</div>
+						{% if project.admin == current_user%}
+						<div class="col-sm-6">
+							{% if requests_length != 0%}
+							<h4>Requests {{requests_length}}</h4>
+							{% endif %}
+							<ul class="list-group" ><!--style="height:250px;overflow: auto;">-->
+
+								{% for req in project.requests %}
+								{% if not req.positive_status %}
+								<li class="list-group-item" id="req_by_{{req.sender}}">
+									<div class="row">
+										<div class="col-10">
+											<a href="/users/{{req.sender.nickname}}" class="link"><img class="ts-image" src={{req.sender.avatar}} width="50px" height="50px">{{req.sender.nickname}}</a>
+										</div>
+										<div class="col-2">
+											<form action="{{url_for('get_project', p=project.team_name)}}" method="post">
+												<button style="" class="none-button">
+													<a>
+														<svg id="add_member" class="ok-link" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-square"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+													</a>
+												</button>
+												<input name="user" value="{{req.sender.nickname}}" style="display: none;">
+												<input name="status" value="add_member" style="display: none;">
+											</form>
+
+											<form action="{{url_for('get_project', p=project.team_name)}}" method="post">
+												<button style="" class="none-button">
+													<svg id="delete_sp_req" class="link link-muted link-danger-muted" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+												</button>
+
+												<input name="user" value="{{req.sender.nickname}}" style="display: none;">
+												<input name="status" value="not_add_member" style="display: none;">
+											</form>
+										</div>
+									</div>
+								</li>
+								{% endif %}
+								{% endfor %}
+							</ul>
+						</div>
+						{%endif%}
 					</div>
 				</div>
+
 			</div>
+
+		</div>
+	</div>
+</div>
 {% endblock %}
