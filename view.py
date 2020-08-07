@@ -274,6 +274,7 @@ def get_project(p):
 						project.members.append(user)
 						req.positive_status = True
 						db.session.commit()
+					return redirect(url_for('get_project', p=project.team_name))
 				if status == 'not_add_member':
 					nickname = request.form['user']
 					user = User.query.filter_by(nickname=nickname).first()
@@ -281,6 +282,7 @@ def get_project(p):
 					if user and req:
 						db.session.delete(req)
 						db.session.commit()
+					return redirect(url_for('get_project', p=project.team_name))
 				if status == 'quit_from_team':
 					user = User.query.filter_by(nickname=current_user.nickname).first()
 					req	 = ProjectUserRequest.query.filter_by(sender=user,project=project).first()
@@ -289,6 +291,17 @@ def get_project(p):
 					if user in project.members:
 						project.members.remove(user)
 					db.session.commit()
+					return redirect(url_for('get_project', p=project.team_name))
+				if status == 'delete_member':
+					nickname = request.form['user']
+					user = User.query.filter_by(nickname=nickname).first()
+					req = ProjectUserRequest.query.filter_by(sender=user,project=project).first()
+					if user:
+						if req:
+							db.session.delete(req)
+						project.members.remove(user)
+						db.session.commit()
+					return redirect(url_for('get_project', p=project.team_name))
 
 			else:
 				return {'status' : 'must_login','team_name':project.team_name}

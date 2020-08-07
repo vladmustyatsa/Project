@@ -83,8 +83,9 @@
 							<ul class="list-group" style="height:250px;overflow: auto;">
 
 								{% for member in project.members %}
-								{% if member == project.admin %}
+								<!--{% if member == project.admin %}
 								<li class="list-group-item">
+
 									<a href="/users/{{member.nickname}}" class="link"><img class="ts-image" src={{member.avatar}} 
 										width="50px" height="50px">
 									{{member.nickname}}</a>
@@ -95,7 +96,29 @@
 									<a href="/users/{{member.nickname}}" class="link"><img class="ts-image" src={{member.avatar}} width="50px" height="50px">{{member.nickname}}
 									</a>
 								</li>
-								{% endif %}
+								{% endif %}-->
+								<li class="list-group-item">
+									<div class="row">
+										<div class="col-10">
+											<a href="/users/{{member.nickname}}" class="link"><img class="ts-image" src={{member.avatar}} width="50px" height="50px">	{{member.nickname}}
+											</a>
+										</div>
+										<div class="col-2" style="padding: 0.7em 0;text-align: center;">
+											{% if member == project.admin %}
+												<span class="text-muted" style="">Admin</span>
+											{% elif current_user == project.admin %}
+												<form action="{{url_for('get_project', p=project.team_name)}}" method="post">
+												<button style="" class="none-button">
+													<svg id="delete_sp_req" class="link link-muted link-danger-muted" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+												</button>
+
+												<input name="user" value="{{member.nickname}}" style="display: none;">
+												<input name="status" value="delete_member" style="display: none;">
+											</form>
+											{% endif %}
+										</div>
+									</div>
+								</li>
 								{% endfor %}
 							</ul>
 						</div>
