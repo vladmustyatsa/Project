@@ -46,7 +46,8 @@ project_members = db.Table('project_members',
 
 project_tags = db.Table('project_tags',
                       db.Column('project_id', db.Integer, db.ForeignKey('project.id')),
-                      db.Column('tag_id', db.Integer, db.ForeignKey('tag.id'))
+                      db.Column('tag_id', db.Integer, db.ForeignKey('tag.id')),
+                      db.PrimaryKeyConstraint('project_id', 'tag_id')
                       )
 
 
